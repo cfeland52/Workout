@@ -1,0 +1,1556 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<title>Workout Book</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #eef0f3;
+  --surface: #ffffff;
+  --surface-2: #f5f6f8;
+  --surface-3: #eceef1;
+  --border: #dde1e7;
+  --text: #1a1e24;
+  --text-muted: #5b6472;
+  --text-faint: #8b93a0;
+  --accent: #c2571f;
+  --accent-strong: #9c4416;
+  --accent-soft: #f5e3d6;
+  --accent-soft-text: #8a3f13;
+  --success: #268a4d;
+  --success-soft: #dcf1e4;
+  --info: #2f6fb0;
+  --info-soft: #dbe9f8;
+  --danger: #b23636;
+  --danger-soft: #f8dede;
+  --shadow: rgba(24, 27, 33, 0.10);
+  --shadow-strong: rgba(24, 27, 33, 0.20);
+  --radius-sm: 8px;
+  --radius: 12px;
+  --radius-lg: 18px;
+  --font-display: "Oswald", "Arial Narrow", sans-serif;
+  --font-body: "IBM Plex Sans", -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #14171c;
+    --surface: #1c2027;
+    --surface-2: #20252d;
+    --surface-3: #262b34;
+    --border: #313640;
+    --text: #eceef1;
+    --text-muted: #9aa2ad;
+    --text-faint: #6b7280;
+    --accent: #e2824c;
+    --accent-strong: #f0995f;
+    --accent-soft: #3a2a1f;
+    --accent-soft-text: #f0b483;
+    --success: #45c377;
+    --success-soft: #163524;
+    --info: #6ba6e0;
+    --info-soft: #172a3c;
+    --danger: #e5716f;
+    --danger-soft: #3a1e1e;
+    --shadow: rgba(0, 0, 0, 0.35);
+    --shadow-strong: rgba(0, 0, 0, 0.5);
+  }
+}
+
+:root[data-theme="dark"] {
+  --bg: #14171c;
+  --surface: #1c2027;
+  --surface-2: #20252d;
+  --surface-3: #262b34;
+  --border: #313640;
+  --text: #eceef1;
+  --text-muted: #9aa2ad;
+  --text-faint: #6b7280;
+  --accent: #e2824c;
+  --accent-strong: #f0995f;
+  --accent-soft: #3a2a1f;
+  --accent-soft-text: #f0b483;
+  --success: #45c377;
+  --success-soft: #163524;
+  --info: #6ba6e0;
+  --info-soft: #172a3c;
+  --danger: #e5716f;
+  --danger-soft: #3a1e1e;
+  --shadow: rgba(0, 0, 0, 0.35);
+  --shadow-strong: rgba(0, 0, 0, 0.5);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+#app { min-height: 100vh; display: flex; flex-direction: column; }
+button, input, select, textarea { font-family: inherit; font-size: inherit; color: inherit; }
+button { cursor: pointer; }
+a { color: var(--accent); }
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; letter-spacing: 0.01em; text-wrap: balance; margin: 0; }
+.mono, .num { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 8px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+@media (prefers-reduced-motion: reduce) { * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; } }
+
+/* ---------- Topbar ---------- */
+.topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 20px; background: var(--surface); border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 20; min-width: 0;
+}
+.brand { display: flex; align-items: baseline; gap: 8px; min-width: 0; flex: none; }
+.brand-mark { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase; }
+.brand-mark .accent { color: var(--accent); }
+.topbar-right { display: flex; align-items: center; gap: 10px; min-width: 0; flex: none; }
+.sync-pill {
+  display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--text-faint);
+  padding: 5px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border);
+}
+.sync-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--text-faint); flex: none; }
+.sync-pill.synced .sync-dot { background: var(--success); }
+.sync-pill.local .sync-dot { background: var(--accent); }
+.sync-pill.saving .sync-dot { background: var(--info); animation: pulse 1s ease-in-out infinite; }
+@keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+.user-chip {
+  display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px; border-radius: 999px;
+  background: var(--surface-2); border: 1px solid var(--border); font-weight: 600; font-size: 13px;
+}
+.user-avatar {
+  width: 26px; height: 26px; border-radius: 50%; background: var(--accent); color: #fff;
+  display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 13px;
+}
+.icon-btn {
+  background: transparent; border: 1px solid var(--border); border-radius: var(--radius-sm);
+  width: 34px; height: 34px; display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+}
+.icon-btn:hover { background: var(--surface-2); color: var(--text); }
+
+/* ---------- Buttons ---------- */
+.btn {
+  border: 1px solid var(--border); background: var(--surface); color: var(--text);
+  padding: 9px 16px; border-radius: var(--radius-sm); font-weight: 600; font-size: 14px;
+  display: inline-flex; align-items: center; gap: 7px; transition: background 0.12s, border-color 0.12s;
+}
+.btn:hover { background: var(--surface-2); }
+.btn-accent { background: var(--accent); border-color: var(--accent); color: #fff; }
+.btn-accent:hover { background: var(--accent-strong); border-color: var(--accent-strong); }
+.btn-ghost { background: transparent; border-color: transparent; }
+.btn-ghost:hover { background: var(--surface-2); }
+.btn-danger { background: transparent; border-color: var(--danger); color: var(--danger); }
+.btn-danger:hover { background: var(--danger-soft); }
+.btn-sm { padding: 6px 11px; font-size: 12.5px; }
+.btn-block { width: 100%; justify-content: center; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+/* ---------- User select view ---------- */
+.user-select-view {
+  flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  padding: 40px 20px; gap: 28px;
+}
+.user-select-view h1 { font-size: 30px; text-transform: uppercase; }
+.user-grid { display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; max-width: 640px; }
+.user-card {
+  width: 140px; padding: 22px 14px; background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); display: flex; flex-direction: column; align-items: center; gap: 10px;
+  box-shadow: 0 1px 2px var(--shadow);
+}
+.user-card:hover { border-color: var(--accent); }
+.user-card .user-avatar { width: 52px; height: 52px; font-size: 22px; }
+.user-card-name { font-weight: 700; font-size: 15px; }
+.user-card-sub { font-size: 12px; color: var(--text-faint); }
+.user-card-add {
+  width: 140px; padding: 22px 14px; border-radius: var(--radius-lg); border: 1.5px dashed var(--border);
+  background: transparent; display: flex; flex-direction: column; align-items: center; gap: 10px; color: var(--text-muted);
+}
+.user-card-add:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- Dashboard layout ---------- */
+.dashboard { flex: 1; max-width: 1100px; margin: 0 auto; width: 100%; padding: 20px 20px 100px; display: flex; flex-direction: column; gap: 18px; min-width: 0; }
+.dash-grid { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 18px; align-items: start; min-width: 0; }
+@media (max-width: 860px) { .dash-grid { grid-template-columns: minmax(0, 1fr); } }
+
+.card {
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  box-shadow: 0 1px 2px var(--shadow); padding: 18px; min-width: 0;
+}
+.card-title { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); font-weight: 700; margin-bottom: 4px; }
+
+/* Month nav */
+.month-nav { display: flex; align-items: center; justify-content: space-between; gap: 6px; min-width: 0; }
+.month-nav h2 { font-size: 22px; text-transform: uppercase; text-align: center; flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.month-nav-controls { display: flex; align-items: center; gap: 6px; flex: none; }
+@media (max-width: 380px) { .month-nav h2 { font-size: 18px; } }
+@media (max-width: 430px) {
+  .topbar { padding: 12px 14px; gap: 8px; }
+  .brand-mark { font-size: 17px; }
+  .topbar-right { gap: 6px; }
+  .sync-label { display: none; }
+  .sync-pill { padding: 6px; }
+  .user-chip { padding: 6px; }
+  .user-name-label { display: none; }
+}
+
+/* Calendar */
+.calendar-weekdays { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; margin: 14px 0 6px; }
+.calendar-weekdays span { text-align: center; font-size: 11px; font-weight: 700; color: var(--text-faint); text-transform: uppercase; letter-spacing: 0.05em; }
+.calendar-grid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 6px; }
+.day-cell {
+  min-width: 0; aspect-ratio: 1 / 0.86; border-radius: var(--radius-sm); border: 1px solid transparent; background: var(--surface-2);
+  display: flex; flex-direction: column; align-items: flex-start; justify-content: space-between; padding: 7px 8px;
+  position: relative; min-height: 52px;
+}
+.day-cell.interactive:hover { border-color: var(--accent); background: var(--surface); }
+.day-cell.outside { opacity: 0.35; }
+.day-cell.today { border-color: var(--accent); }
+.day-cell .day-num { font-family: var(--font-mono); font-size: 13px; font-weight: 600; color: var(--text-muted); }
+.day-cell.today .day-num { color: var(--accent); font-weight: 700; }
+.day-dots { display: flex; gap: 4px; align-self: flex-end; }
+.dot { width: 7px; height: 7px; border-radius: 50%; }
+.dot-workout { background: var(--success); }
+.dot-event { background: var(--info); }
+
+/* Stats sidebar */
+.stat-tile { display: flex; flex-direction: column; gap: 2px; }
+.stat-value { font-family: var(--font-display); font-size: 30px; font-weight: 600; }
+.stat-sub { font-size: 12.5px; color: var(--text-muted); }
+.stat-row { display: flex; gap: 14px; min-width: 0; }
+.stat-row .stat-tile { flex: 1; min-width: 0; }
+.chart-wrap { margin-top: 10px; }
+.chart-caption { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-faint); margin-top: 4px; }
+
+/* FAB */
+.fab-row { position: fixed; right: 20px; bottom: 22px; display: flex; flex-direction: column; gap: 10px; z-index: 15; align-items: flex-end; }
+.fab {
+  border-radius: 999px; background: var(--accent); color: #fff; border: none; box-shadow: 0 6px 18px var(--shadow-strong);
+  padding: 13px 20px; font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 8px;
+}
+.fab-secondary { background: var(--surface); color: var(--text); border: 1px solid var(--border); padding: 10px 16px; font-size: 13px; }
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(10, 12, 15, 0.5); display: flex; align-items: flex-end;
+  justify-content: center; z-index: 50; padding: 0;
+}
+@media (min-width: 640px) { .modal-overlay { align-items: center; padding: 20px; } }
+.modal {
+  background: var(--surface); width: 100%; max-width: 620px; max-height: 92vh; overflow-y: auto;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0; box-shadow: 0 -4px 30px var(--shadow-strong);
+  display: flex; flex-direction: column;
+}
+@media (min-width: 640px) { .modal { border-radius: var(--radius-lg); box-shadow: 0 20px 50px var(--shadow-strong); } }
+.modal-header {
+  display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; background: var(--surface); z-index: 2;
+}
+.modal-header h3 { font-size: 18px; text-transform: uppercase; }
+.modal-body { padding: 18px 20px; display: flex; flex-direction: column; gap: 16px; }
+.modal-footer { padding: 14px 20px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end; position: sticky; bottom: 0; background: var(--surface); }
+
+/* ---------- Forms ---------- */
+.field { display: flex; flex-direction: column; gap: 5px; }
+.field label { font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.field input, .field select, .field textarea {
+  border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 9px 11px; background: var(--surface);
+  color: var(--text); width: 100%;
+}
+.field textarea { resize: vertical; min-height: 60px; }
+.field-row { display: flex; gap: 10px; min-width: 0; }
+.field-row .field { flex: 1; min-width: 0; }
+.pill-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill-choice {
+  padding: 8px 14px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface);
+  font-weight: 600; font-size: 13px; color: var(--text-muted);
+}
+.pill-choice.selected { background: var(--accent-soft); border-color: var(--accent); color: var(--accent-soft-text); }
+.helptext { font-size: 12px; color: var(--text-faint); }
+.divider { height: 1px; background: var(--border); border: none; margin: 4px 0; }
+.section-label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--text-faint); font-weight: 700; }
+
+/* option cards (template vs scratch, category grid) */
+.choice-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 10px; }
+.choice-card {
+  border: 1px solid var(--border); border-radius: var(--radius); padding: 14px 10px; text-align: center;
+  background: var(--surface); font-weight: 700; font-size: 13.5px;
+}
+.choice-card:hover { border-color: var(--accent); }
+.choice-card.selected { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-soft-text); }
+
+/* Template preview cards */
+.template-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 12px 14px; display: flex; flex-direction: column; gap: 6px; }
+.template-card:hover { border-color: var(--accent); }
+.template-card .tc-date { font-weight: 700; font-size: 13px; }
+.template-card .tc-list { font-size: 12.5px; color: var(--text-muted); }
+
+/* ---------- Workout builder blocks ---------- */
+.block-card { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.block-card-head {
+  display: flex; align-items: center; justify-content: space-between; padding: 8px 12px; background: var(--surface-2);
+  border-bottom: 1px solid var(--border);
+}
+.block-type-badge {
+  font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 3px 8px;
+  border-radius: 999px; background: var(--info-soft); color: var(--info);
+}
+.block-type-badge.standard { background: var(--surface-3); color: var(--text-muted); }
+.exercise-slot { padding: 10px 12px; border-top: 1px dashed var(--border); }
+.exercise-slot:first-of-type { border-top: none; }
+.exercise-slot-head { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; min-width: 0; }
+.exercise-name-input { flex: 1; min-width: 0; }
+.set-row { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; min-width: 0; }
+.set-row .set-idx { font-family: var(--font-mono); font-size: 12px; color: var(--text-faint); width: 20px; flex: none; text-align: center; }
+.set-row input[type="text"] { width: 100%; min-width: 0; border: 1px solid var(--border); border-radius: 6px; padding: 7px 8px; background: var(--surface); }
+.set-row input.stale { color: var(--text-faint); background: var(--surface-2); }
+.set-row-remove { flex: none; }
+.stage-row { display: flex; align-items: center; gap: 6px; margin-bottom: 5px; padding-left: 26px; min-width: 0; }
+.stage-row input { width: 100%; min-width: 0; }
+.set-block { border: 1px dashed var(--border); border-radius: 8px; padding: 6px 8px 8px; margin-bottom: 6px; }
+.set-block-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.tiny-label { font-size: 10.5px; color: var(--text-faint); font-weight: 700; text-transform: uppercase; }
+.link-btn { background: none; border: none; color: var(--accent); font-weight: 600; font-size: 12.5px; padding: 4px 2px; }
+.link-btn:hover { text-decoration: underline; }
+.row-actions { display: flex; gap: 10px; margin-top: 4px; }
+
+/* ---------- Day detail ---------- */
+.bw-row {
+  display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-bottom: 14px;
+  border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2);
+}
+.bw-label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-faint); flex: none; }
+.bw-value { font-family: var(--font-mono); font-weight: 700; font-size: 15px; }
+.bw-row .row-actions { margin-left: auto; margin-top: 0; }
+.bw-row .helptext { margin-left: auto; }
+.workout-summary-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+.category-badge {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 4px 10px;
+  border-radius: 999px; background: var(--accent-soft); color: var(--accent-soft-text);
+}
+.meta-strip { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12.5px; color: var(--text-muted); margin: 6px 0 4px; }
+.meta-strip strong { color: var(--text); }
+.exercise-block-view { border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; margin-top: 10px; }
+.exercise-block-view + .exercise-block-view { margin-top: 10px; }
+.exercise-view-name { font-weight: 700; font-size: 13.5px; margin-bottom: 4px; }
+.superset-tag { font-size: 10px; color: var(--info); text-transform: uppercase; font-weight: 700; letter-spacing: 0.06em; margin-bottom: 6px; }
+.sets-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.sets-table td { padding: 3px 6px 3px 0; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+.sets-table td:first-child { color: var(--text-faint); width: 22px; }
+.drop-chain { color: var(--text-muted); }
+.cardio-card { border: 1px solid var(--border); border-radius: var(--radius); padding: 10px 12px; margin-top: 10px; display: flex; flex-direction: column; gap: 4px; }
+.cardio-card .cc-title { font-weight: 700; font-size: 13.5px; }
+.empty-state { text-align: center; padding: 30px 10px; color: var(--text-faint); display: flex; flex-direction: column; align-items: center; gap: 10px; }
+
+/* exercise list management */
+.exercise-manage-group { margin-bottom: 14px; }
+.exercise-manage-group h4 { font-size: 13px; margin-bottom: 6px; }
+.exercise-chip-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.exercise-chip { padding: 5px 10px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--border); font-size: 12px; }
+
+/* toast */
+.toast { position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%); background: var(--text); color: var(--bg);
+  padding: 10px 18px; border-radius: 999px; font-size: 13px; z-index: 80; box-shadow: 0 6px 20px var(--shadow-strong); }
+
+.wide-overlay-note { font-size: 12px; color: var(--text-faint); text-align: center; padding: 6px 0; }
+
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script>
+/* ======================================================================
+   Workout Book — standalone application script.
+   A single self-contained HTML file with no external dependencies. State
+   is kept in this browser's localStorage (per device). Export/Import
+   buttons let a backup file be saved (e.g. onto a desktop) and merged
+   back in on any device — the universal, works-everywhere sync path.
+   ====================================================================== */
+
+var STATE = {"users": [{"id": "clay", "name": "Clay"}], "currentSchemaVersion": 1, "exercises": {"Chest": ["SB Flat Bench", "DB Flat Bench", "SB Incline Bench", "DB Incline Bench", "Machine Press", "Machine Incline Press", "Machine Decline Press", "DB Flat Fly", "DB Incline Fly", "DB Standing Fly", "Machine Fly", "Cable Fly (High)", "Cable Fly (Mid)", "Cable Fly (Low)", "Machine Chest Fly", "Flat DB Press", "Plate Squeeze", "Decline Machine Chest Press"], "Back": ["Wide Grip Lat Pulldown", "Close Grip Lat Pulldown", "Single Arm Lat Pulldown", "Wide Grip Seated Row", "Close Grip Seated Row", "Single Arm Seated Row", "SB Bent Over Row (Overhand)", "SB Bent Over Row (Underhand)", "DB Bent Over Row", "Chest Supported DB Row", "Straight Arm Pulldown", "Machine High Row", "Close Grip T-Bar Row", "Wide Grip T-Bar Row", "SB Deadlift", "Close Grip Machine Row", "Overhand Machine Row", "Hammer Strength ISO Row", "Hammer Strength Row", "Seated CG Cable Row", "DB Row", "St.A Pull-down", "Back Extension"], "Shoulders": ["DB Military Press", "SB Military Press", "DB Side Raise", "Cable Side Raise", "Machine Side Raise", "DB Front Raise", "SB Front Raise", "Cable Front Raise", "Chest Supported DB Front Raise", "2-Way Shoulders (Plate)", "Arnold Press", "Standing SB Military Press", "SB Shrug", "DB Upright Row", "Cable SA Front Raise", "2 Way Shoulder"], "Legs": ["Squat", "Gobblet Squat", "Hack Squat", "Leg Press", "SB RDL", "DB RDL", "DB Lunges", "SB Lunges", "Bulgarian Split Squat", "Leg Extension", "Leg Curl", "Adductor", "Abductor", "Hip Thruster (Machine)", "Seated Calf Raises", "Hip Thruster (SB)", "SB Back Squats", "Elevated SB RDL", "Single Leg Quad Ext"], "Biceps": ["Standing DB Curl", "Seated DB Curl", "DB Iso Curl", "Incline DB Curl", "DB Hammer Curl", "EZ Bar Curl", "SB Curl", "EZ Bar Reverse Curl", "SB Reverse Curl", "DB Preacher Curl", "EZ Bar Preacher Curl", "SB Preacher Curl", "SA Cable Curl", "Cable Reverse Curl", "Seated DB Hammer Curl", "Spider Rev Curl", "Plate Machine Curl", "Machine Curl", "Ez Bar Curl"], "Triceps": ["DB Overhead Tricep Ext", "SB Overhead Tricep Ext", "Cable Overhead Tricep Ext", "SA DB Overhead Tricep Ext", "EZ Bar Skull Crusher", "SB Skull Crusher", "EZ Bar Incline Skull Crusher", "SB Incline Skull Crusher", "DB Tricep Kickback", "Cable Tricep Kickback", "Cable Tricep Pushdown", "SA Cable Tricep Pushdown", "Plate Loaded Machine Dips", "SA Cable Tri Pushdown", "Rope Tri Pushdown", "Rope Pushdowns", "Vbar OH Tri Ext", "Vbar Tri Pushdown", "Vbar Cable OH Tri Ext", "Rope OH Tri Ext"], "Traps": ["EZ Bar Upright Row", "SB Upright Row", "DB Shrugs", "SB Shrugs", "DB Rear Delt Fly", "Machine Rear Delt Fly", "Face Pull"], "Abs": ["Cable Crunch", "Hanging Leg Raise", "Cable Trunk Twist", "Circuit*", "TTB", "KB V Up", "Lying Leg Lifts", "KB Woodchopper", "KB Swing"], "Body": ["Pull Ups", "Push Ups", "Pull-up", "CG Pull-up"], "Cardio": ["Treadmill", "Row Machine", "Bike", "Other"]}, "workouts": [{"id": "w-c159bc26", "userId": "clay", "date": "2026-04-11", "category": "Legs", "bodyWeight": 254, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "superset", "exercises": [{"name": "Abductor", "muscleGroup": "Legs", "sets": [{"reps": "25", "weight": "100"}, {"reps": "25", "weight": "120"}, {"reps": "20", "weight": "140"}]}, {"name": "Adductor", "muscleGroup": "Legs", "sets": [{"reps": "25", "weight": "80"}, {"reps": "25", "weight": "100"}, {"reps": "20", "weight": "120"}]}]}, {"type": "standard", "exercises": [{"name": "Single Leg Quad Ext", "muscleGroup": "Legs", "sets": [{"reps": "15", "weight": "40"}, {"reps": "15", "weight": "40"}, {"reps": "15", "weight": "40"}]}]}, {"type": "standard", "exercises": [{"name": "SB Back Squats", "muscleGroup": "Legs", "sets": [{"reps": "10", "weight": "135"}, {"reps": "10", "weight": "135"}, {"reps": "10", "weight": "135"}]}]}, {"type": "standard", "exercises": [{"name": "Elevated SB RDL", "muscleGroup": "Legs", "sets": [{"reps": "12", "weight": "135"}, {"reps": "12", "weight": "135"}, {"reps": "12", "weight": "135"}]}]}, {"type": "standard", "exercises": [{"name": "Seated Calf Raises", "muscleGroup": "Legs", "sets": [{"reps": "20", "weight": "70"}, {"reps": "20", "weight": "70"}, {"reps": "20", "weight": "70"}]}]}], "cardio": [{"machine": "Row Machine", "intervals": [{"distance": "500m", "split": "1:48.1"}, {"distance": "500m", "split": "1:52.3"}, {"distance": "500m", "split": "1:59.8"}], "rests": ["0:45", "0:45"]}]}, {"id": "w-f8158faa", "userId": "clay", "date": "2026-04-15", "category": "Chest", "bodyWeight": 252, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "Machine Chest Fly", "muscleGroup": "Chest", "sets": [{"reps": "20", "weight": "110"}, {"reps": "20", "weight": "110"}]}]}, {"type": "standard", "exercises": [{"name": "SB Incline Press", "muscleGroup": "Chest", "sets": [{"reps": "20", "weight": "135"}, {"reps": "20", "weight": "135"}]}]}, {"type": "superset", "exercises": [{"name": "High Cable Fly", "muscleGroup": "Chest", "sets": [{"reps": "20", "weight": "15"}, {"reps": "20", "weight": "15"}]}, {"name": "SA Pushdown", "muscleGroup": "Triceps", "sets": [{"reps": "20", "weight": "15"}, {"reps": "20", "weight": "15"}]}]}, {"type": "standard", "exercises": [{"name": "Low Cable Fly", "muscleGroup": "Chest", "sets": [{"reps": "20", "weight": "20"}, {"reps": "20", "weight": "20"}]}]}, {"type": "superset", "exercises": [{"name": "Vbar OH Tri Ext", "muscleGroup": "Triceps", "sets": [{"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}]}, {"name": "Vbar Tri Pushdown", "muscleGroup": "Triceps", "sets": [{"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}]}]}], "cardio": []}, {"id": "w-402c0251", "userId": "clay", "date": "2026-04-17", "category": "Legs", "bodyWeight": 254, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "superset", "exercises": [{"name": "Abductor", "muscleGroup": "Legs", "sets": [{"reps": "25", "weight": "100"}, {"reps": "25", "weight": "120"}, {"reps": "20", "weight": "140"}]}, {"name": "Adductor", "muscleGroup": "Legs", "sets": [{"reps": "25", "weight": "80"}, {"reps": "25", "weight": "100"}, {"reps": "20", "weight": "120"}]}]}, {"type": "standard", "exercises": [{"name": "SB Back Squats", "muscleGroup": "Legs", "sets": [{"reps": "15", "weight": "135"}, {"reps": "12", "weight": "185"}, {"reps": "12", "weight": "185"}]}]}, {"type": "standard", "exercises": [{"name": "Elevated SB RDL", "muscleGroup": "Legs", "sets": [{"reps": "12", "weight": "135"}, {"reps": "12", "weight": "135"}, {"reps": "12", "weight": "135"}]}]}, {"type": "standard", "exercises": [{"name": "Single Leg Quad Ext", "muscleGroup": "Legs", "sets": [{"reps": "10", "weight": "100"}, {"reps": "10", "weight": "100"}, {"isDrop": true, "stages": [{"reps": "10", "weight": "100"}, {"reps": "10", "weight": "50"}]}]}]}, {"type": "standard", "exercises": [{"name": "Seated Calf Raises", "muscleGroup": "Legs", "sets": [{"reps": "20", "weight": "70"}, {"reps": "20", "weight": "70"}, {"reps": "20", "weight": "70"}]}]}], "cardio": [{"machine": "Row Machine", "intervals": [{"distance": "500m", "split": "1:48.1"}, {"distance": "500m", "split": "1:52.3"}, {"distance": "500m", "split": "1:59.8"}], "rests": ["0:45", "0:45"]}]}, {"id": "w-c3690ddc", "userId": "clay", "date": "2026-07-01", "category": "Upper", "bodyWeight": 250, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "superset", "exercises": [{"name": "Abductor", "muscleGroup": "Legs", "sets": [{"reps": "20", "weight": "100"}, {"reps": "20", "weight": "100"}]}, {"name": "Adductor", "muscleGroup": "Legs", "sets": [{"reps": "20", "weight": "100"}, {"reps": "20", "weight": "100"}]}]}, {"type": "standard", "exercises": [{"name": "Hammer Strength ISO Row", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "135"}, {"reps": "15", "weight": "160"}]}]}, {"type": "standard", "exercises": [{"name": "SB Flat Bench", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "135"}, {"reps": "15", "weight": "135"}, {"reps": "15", "weight": "185"}, {"isDrop": true, "stages": [{"reps": "10", "weight": "185"}, {"reps": "10", "weight": "135"}]}]}]}, {"type": "standard", "exercises": [{"name": "Incline DB Curl", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "30"}, {"reps": "15", "weight": "30"}, {"reps": "15", "weight": "30"}]}]}, {"type": "standard", "exercises": [{"name": "SA Cable Tri Pushdown", "muscleGroup": "Triceps", "sets": [{"isDrop": true, "stages": [{"reps": "20", "weight": "20"}, {"reps": "15", "weight": "20"}, {"reps": "10", "weight": "20"}, {"reps": "5", "weight": "20"}]}, {"isDrop": true, "stages": [{"reps": "20", "weight": "20"}, {"reps": "15", "weight": "20"}, {"reps": "10", "weight": "20"}, {"reps": "5", "weight": "20"}]}]}]}], "cardio": []}, {"id": "w-d9268d7b", "userId": "clay", "date": "2026-07-03", "category": "Lower", "bodyWeight": 255, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "superset", "exercises": [{"name": "Abductor", "muscleGroup": "Legs", "sets": [{"reps": "30", "weight": "80"}, {"reps": "25", "weight": "100"}, {"reps": "20", "weight": "120"}]}, {"name": "Adductor", "muscleGroup": "Legs", "sets": [{"reps": "30", "weight": "60"}, {"reps": "25", "weight": "80"}, {"reps": "20", "weight": "100"}]}]}, {"type": "standard", "exercises": [{"name": "SB Back Squats", "muscleGroup": "Legs", "sets": [{"reps": "10", "weight": "135"}, {"reps": "10", "weight": "135"}, {"reps": "10", "weight": "135"}]}]}, {"type": "standard", "exercises": [{"name": "SB RDL", "muscleGroup": "Legs", "sets": [{"reps": "12", "weight": "135"}, {"reps": "12", "weight": "135"}, {"reps": "12", "weight": "135"}]}]}, {"type": "standard", "exercises": [{"name": "Single Leg Quad Ext", "muscleGroup": "Legs", "sets": [{"reps": "12", "weight": "30"}, {"reps": "12", "weight": "30"}, {"reps": "12", "weight": "30"}]}]}, {"type": "standard", "exercises": [{"name": "Seated Calf Raises", "muscleGroup": "Legs", "sets": []}]}], "cardio": []}, {"id": "w-eef6b9b0", "userId": "clay", "date": "2026-07-04", "category": "Upper", "bodyWeight": 255, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "SB Flat Bench", "muscleGroup": "Chest", "sets": [{"reps": "5", "weight": "225"}, {"reps": "5", "weight": "250"}, {"reps": "5", "weight": "250"}, {"isDrop": true, "stages": [{"reps": "5", "weight": "250"}, {"reps": "15", "weight": "135"}]}]}]}, {"type": "standard", "exercises": [{"name": "Pull-up", "muscleGroup": "Body", "sets": [{"reps": "5", "weight": "-"}, {"reps": "5", "weight": "-"}, {"reps": "5", "weight": "-"}, {"reps": "5", "weight": "-"}, {"reps": "5", "weight": "-"}]}]}, {"type": "standard", "exercises": [{"name": "DB Military Press", "muscleGroup": "Shoulders", "sets": [{"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}]}]}, {"type": "superset", "exercises": [{"name": "Incline DB Curl", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "30"}, {"reps": "15", "weight": "30"}, {"reps": "15", "weight": "30"}]}, {"name": "DB Kickback", "muscleGroup": "Triceps", "sets": [{"reps": "15", "weight": "15"}, {"reps": "15", "weight": "15"}, {"reps": "15", "weight": "15"}]}]}, {"type": "standard", "exercises": [{"name": "Seated CG Cable Row", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "110"}, {"reps": "15", "weight": "122"}, {"reps": "15", "weight": "122"}]}]}, {"type": "superset", "exercises": [{"name": "Rope Tri Pushdown", "muscleGroup": "Triceps", "sets": [{"reps": "15", "weight": "60"}, {"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}]}, {"name": "Cable Crunch", "muscleGroup": "Abs", "sets": [{"reps": "15", "weight": "88"}, {"reps": "15", "weight": "88"}, {"reps": "15", "weight": "88"}]}]}, {"type": "superset", "exercises": [{"name": "SA Cable Curl", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "16.5"}, {"reps": "15", "weight": "16.5"}, {"isDrop": true, "stages": [{"reps": "10-10", "weight": "22"}]}]}, {"name": "TTB", "muscleGroup": "Abs", "sets": [{"reps": "5", "weight": "-"}, {"reps": "5", "weight": "-"}, {"reps": "5", "weight": "-"}]}]}], "cardio": [{"machine": "Treadmill", "time": "25 min", "speed": "3 mph", "incline": "12"}]}, {"id": "w-290afa47", "userId": "clay", "date": "2026-07-07", "category": "Upper", "bodyWeight": 250, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "superset", "exercises": [{"name": "Pull-up", "muscleGroup": "Body", "sets": [{"reps": "5", "weight": "-"}, {"reps": "5", "weight": "-"}, {"reps": "5", "weight": "-"}]}, {"name": "SB Curl", "muscleGroup": "Biceps", "sets": [{"reps": "10", "weight": "95"}, {"reps": "10", "weight": "95"}, {"reps": "10", "weight": "95"}]}]}, {"type": "superset", "exercises": [{"name": "Standing SB Military Press", "muscleGroup": "Shoulders", "sets": [{"reps": "12", "weight": "95"}, {"reps": "12", "weight": "95"}, {"reps": "12", "weight": "95"}]}, {"name": "2 Way Shoulder", "muscleGroup": "Shoulders", "sets": [{"reps": "15/15", "weight": "10"}, {"reps": "15/15", "weight": "10"}, {"reps": "15/15", "weight": "10"}]}]}, {"type": "superset", "exercises": [{"name": "DB Bent Over Row", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}]}, {"name": "Incline DB Curl", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "30"}, {"reps": "15", "weight": "30"}]}]}, {"type": "standard", "exercises": [{"name": "Decline Machine Chest Press", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "225"}, {"reps": "15", "weight": "225"}, {"reps": "10", "weight": "275"}]}]}, {"type": "standard", "exercises": [{"name": "SA Cable Pushdown", "muscleGroup": "Triceps", "sets": [{"isDrop": true, "stages": [{"reps": "15", "weight": "22"}, {"reps": "20", "weight": "16.5"}, {"reps": "25", "weight": "11"}]}]}]}], "cardio": []}, {"id": "w-0a401306", "userId": "clay", "date": "2026-07-12", "category": "Shoulders", "bodyWeight": null, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "Arnold Press", "muscleGroup": "Shoulders", "sets": [{"reps": "12", "weight": "40"}, {"reps": "12", "weight": "40"}, {"reps": "12", "weight": "40"}]}]}, {"type": "superset", "exercises": [{"name": "Incline Skull Crusher", "muscleGroup": "Triceps", "sets": [{"reps": "15", "weight": "80"}, {"reps": "15", "weight": "80"}, {"reps": "15", "weight": "80"}]}, {"name": "DB Side Raise", "muscleGroup": "Shoulders", "sets": [{"reps": "15", "weight": "30"}, {"reps": "15", "weight": "30"}, {"reps": "15", "weight": "30"}]}]}, {"type": "superset", "exercises": [{"name": "Cable Front Raise", "muscleGroup": "Shoulders", "sets": [{"reps": "12", "weight": "16.5"}, {"reps": "12", "weight": "16.5"}, {"reps": "12", "weight": "16.5"}]}, {"name": "TTB", "muscleGroup": "Abs", "sets": [{"reps": "8", "weight": "-"}, {"reps": "8", "weight": "-"}, {"reps": "8", "weight": "-"}]}]}, {"type": "standard", "exercises": [{"name": "SA Cable Pushdown", "muscleGroup": "Triceps", "sets": [{"reps": "20", "weight": "22"}, {"isDrop": true, "stages": [{"reps": "20", "weight": "22"}, {"reps": "20", "weight": "16.5"}]}]}]}], "cardio": []}, {"id": "w-3e147979", "userId": "clay", "date": "2026-07-14", "category": "Back", "bodyWeight": 253, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "WG Lat Pull-down", "muscleGroup": "Back", "sets": [{"reps": "20", "weight": "121"}, {"reps": "15", "weight": "165"}, {"reps": "15", "weight": "165"}]}]}, {"type": "superset", "exercises": [{"name": "DB Row", "muscleGroup": "Back", "sets": [{"reps": "12", "weight": "70"}, {"reps": "12", "weight": "70"}, {"reps": "12", "weight": "70"}]}, {"name": "Incline DB Curl", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "35"}, {"reps": "15", "weight": "35"}, {"isDrop": true, "stages": [{"reps": "15", "weight": "35"}, {"reps": "15", "weight": "20"}]}]}]}, {"type": "superset", "exercises": [{"name": "Back Extension", "muscleGroup": "Back", "sets": [{"reps": "10", "weight": "-"}, {"reps": "10", "weight": "25"}, {"reps": "10", "weight": "25"}]}, {"name": "DB Hammer Curl", "muscleGroup": "Biceps", "sets": [{"reps": "12", "weight": "35"}, {"reps": "15", "weight": "35"}, {"reps": "15", "weight": "35"}]}]}, {"type": "standard", "exercises": [{"name": "Hammer Strength Row", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "135"}, {"reps": "15", "weight": "135"}]}]}, {"type": "superset", "exercises": [{"name": "St.A Pull-down", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "60"}, {"reps": "15", "weight": "60"}]}, {"name": "TTB", "muscleGroup": "Abs", "sets": [{"reps": "8", "weight": "-"}, {"reps": "8", "weight": "-"}]}]}, {"type": "standard", "exercises": [{"name": "Plate Machine Curl", "muscleGroup": "Biceps", "sets": [{"isDrop": true, "stages": [{"reps": "12", "weight": "45"}, {"reps": "12", "weight": "35"}, {"reps": "12", "weight": "25"}]}, {"isDrop": true, "stages": [{"reps": "12", "weight": "45"}, {"reps": "12", "weight": "35"}, {"reps": "12", "weight": "25"}]}]}]}], "cardio": []}, {"id": "w-309cfd9d", "userId": "clay", "date": "2026-07-18", "category": "Chest", "bodyWeight": 253, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "SB Incline Bench", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "135"}, {"reps": "12", "weight": "185"}, {"reps": "8", "weight": "205"}, {"reps": "8", "weight": "205"}]}]}, {"type": "superset", "exercises": [{"name": "Flat DB Press", "muscleGroup": "Chest", "sets": [{"reps": "10", "weight": "80"}, {"reps": "9", "weight": "80"}, {"reps": "9", "weight": "80"}]}, {"name": "Plate Squeeze", "muscleGroup": "Chest", "sets": [{"reps": "12", "weight": "25"}, {"reps": "12", "weight": "25"}, {"reps": "12", "weight": "25"}]}]}, {"type": "superset", "exercises": [{"name": "SB Incline Skull Crusher", "muscleGroup": "Triceps", "sets": [{"reps": "12", "weight": "90"}, {"reps": "12", "weight": "90"}, {"reps": "12", "weight": "90"}]}, {"name": "DB Low Fly", "muscleGroup": "Chest", "sets": [{"reps": "12", "weight": "35"}, {"reps": "12", "weight": "35"}, {"reps": "12", "weight": "35"}]}]}, {"type": "superset", "exercises": [{"name": "SA Cable Tri Pushdown", "muscleGroup": "Triceps", "sets": [{"isDrop": true, "stages": [{"reps": "12", "weight": "27.5"}, {"reps": "12", "weight": "22"}]}, {"isDrop": true, "stages": [{"reps": "12", "weight": "27.5"}, {"reps": "15", "weight": "22"}]}]}, {"name": "TTB", "muscleGroup": "Abs", "sets": []}]}, {"type": "superset", "exercises": [{"name": "Rope Pushdowns", "muscleGroup": "Triceps", "sets": [{"reps": "12", "weight": "50"}, {"reps": "15", "weight": "50"}, {"reps": "14", "weight": "55"}]}, {"name": "Cable Crunch", "muscleGroup": "Abs", "sets": [{"reps": "15", "weight": "88"}, {"reps": "15", "weight": "88"}, {"reps": "15", "weight": "88"}]}]}], "cardio": [{"machine": "Treadmill", "time": "25 min", "speed": "3 mph", "incline": "12"}]}, {"id": "w-3aa80edf", "userId": "clay", "date": "2026-07-19", "category": "Shoulders", "bodyWeight": null, "startTime": null, "endTime": null, "notes": "Shoulders / Traps", "blocks": [{"type": "standard", "exercises": [{"name": "CG Pull-up", "muscleGroup": "Body", "sets": [{"reps": "8", "weight": "-"}, {"reps": "8", "weight": "-"}, {"reps": "8", "weight": "-"}]}]}, {"type": "standard", "exercises": [{"name": "SB Shrug", "muscleGroup": "Traps", "sets": [{"reps": "15", "weight": "135"}, {"reps": "12", "weight": "225"}, {"reps": "12", "weight": "225"}]}]}, {"type": "superset", "exercises": [{"name": "DB Military Press", "muscleGroup": "Shoulders", "sets": [{"reps": "20", "weight": "50"}, {"reps": "20", "weight": "50"}, {"reps": "15", "weight": "50"}]}, {"name": "DB Upright Row", "muscleGroup": "Traps", "sets": [{"reps": "12", "weight": "70"}, {"reps": "12", "weight": "70"}, {"reps": "12", "weight": "70"}]}]}, {"type": "superset", "exercises": [{"name": "Cable SA Front Raise", "muscleGroup": "Shoulders", "sets": [{"reps": "12", "weight": "15"}, {"reps": "12", "weight": "15"}, {"reps": "12", "weight": "15"}]}, {"name": "SA Cable Curl", "muscleGroup": "Biceps", "sets": [{"reps": "12", "weight": "15"}, {"reps": "12", "weight": "15"}, {"reps": "12", "weight": "20"}]}]}, {"type": "superset", "exercises": [{"name": "KB Swing", "muscleGroup": "Abs", "sets": [{"reps": "15", "weight": "35"}, {"reps": "15", "weight": "35"}, {"reps": "15", "weight": "35"}]}, {"name": "KB Woodchopper", "muscleGroup": "Abs", "sets": [{"reps": "12", "weight": "35"}, {"reps": "12", "weight": "35"}, {"reps": "12", "weight": "35"}]}]}, {"type": "superset", "exercises": [{"name": "KB V Up", "muscleGroup": "Abs", "sets": [{"reps": "12", "weight": "35"}, {"reps": "12", "weight": "35"}, {"reps": "12", "weight": "35"}]}, {"name": "Lying Leg Lifts", "muscleGroup": "Abs", "sets": [{"reps": "12", "weight": "-"}, {"reps": "12", "weight": "-"}, {"reps": "12", "weight": "-"}]}]}], "cardio": []}, {"id": "w-db1aaf8b", "userId": "clay", "date": "2026-07-21", "category": "Back", "bodyWeight": 251, "startTime": null, "endTime": null, "notes": "Back (Light)", "blocks": [{"type": "standard", "exercises": [{"name": "WG Lat Pull-down", "muscleGroup": "Back", "sets": [{"reps": "20", "weight": "99"}, {"reps": "20", "weight": "110"}, {"reps": "20", "weight": "121"}]}]}, {"type": "standard", "exercises": [{"name": "Hammer Strength Row", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "90"}, {"reps": "15", "weight": "90"}, {"reps": "15 (CG)", "weight": "90"}, {"reps": "15 (CG)", "weight": "90"}]}]}, {"type": "superset", "exercises": [{"name": "Back Extension", "muscleGroup": "Back", "sets": [{"reps": "10", "weight": "-"}, {"reps": "10", "weight": "25"}, {"reps": "10", "weight": "25"}]}, {"name": "DB Curl", "muscleGroup": "Biceps", "sets": [{"reps": "10", "weight": "25"}, {"reps": "10", "weight": "25"}, {"reps": "10", "weight": "25"}]}, {"name": "DB Hammer Curl", "muscleGroup": "Biceps", "sets": [{"reps": "10", "weight": "25"}, {"reps": "10", "weight": "25"}, {"reps": "10", "weight": "25"}]}]}, {"type": "superset", "exercises": [{"name": "St.A Pull-down", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "60"}, {"reps": "15", "weight": "60"}]}, {"name": "TTB", "muscleGroup": "Abs", "sets": [{"reps": "8", "weight": "-"}, {"reps": "8", "weight": "-"}]}]}], "cardio": []}, {"id": "w-89084556", "userId": "clay", "date": "2026-07-22", "category": "Chest", "bodyWeight": 253, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "SB Incline Bench", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "135"}, {"reps": "12", "weight": "185"}, {"reps": "10", "weight": "185"}, {"reps": "8", "weight": "185"}]}]}, {"type": "superset", "exercises": [{"name": "Flat DB Press", "muscleGroup": "Chest", "sets": [{"reps": "12", "weight": "50"}, {"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}]}, {"name": "Plate Squeeze", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "25"}, {"reps": "15", "weight": "25"}, {"reps": "15", "weight": "25"}]}]}, {"type": "superset", "exercises": [{"name": "Vbar Cable OH Tri Ext", "muscleGroup": "Triceps", "sets": [{"reps": "20", "weight": "50"}, {"reps": "20", "weight": "50"}, {"reps": "20", "weight": "50"}]}, {"name": "Cable Crunch", "muscleGroup": "Abs", "sets": [{"reps": "12", "weight": "88"}, {"reps": "15", "weight": "88"}, {"reps": "15", "weight": "88"}]}]}, {"type": "standard", "exercises": [{"name": "SA Cable Tri Pushdown", "muscleGroup": "Triceps", "sets": [{"reps": "20", "weight": "22"}, {"reps": "20", "weight": "22"}, {"reps": "-", "weight": "-"}, {"reps": "20", "weight": "16.5"}]}]}], "cardio": [{"machine": "Treadmill", "time": "25 min", "speed": "3 mph", "incline": "12"}]}, {"id": "w-402c2623", "userId": "clay", "date": "2026-07-24", "category": "Upper", "bodyWeight": 250, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "SB Flat Bench", "muscleGroup": "Chest", "sets": [{"reps": "8", "weight": "225"}, {"reps": "8", "weight": "225"}, {"reps": "6", "weight": "225"}]}]}, {"type": "superset", "exercises": [{"name": "DB Bent Over Row", "muscleGroup": "Back", "sets": [{"reps": "10", "weight": "80"}, {"reps": "10", "weight": "80"}, {"reps": "10", "weight": "80"}]}, {"name": "DB Incline Curl", "muscleGroup": "Biceps", "sets": [{"reps": "12", "weight": "40"}, {"reps": "12", "weight": "40"}, {"isDrop": true, "stages": [{"reps": "12-12p12", "weight": "40-25p25"}]}]}]}, {"type": "superset", "exercises": [{"name": "Spider Rev Curl", "muscleGroup": "Biceps", "sets": [{"reps": "12", "weight": "70"}, {"reps": "12", "weight": "70"}, {"reps": "12", "weight": "70"}]}, {"name": "DB Incline Fly", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "25"}, {"reps": "15", "weight": "25"}, {"reps": "15", "weight": "25"}]}]}, {"type": "standard", "exercises": [{"name": "SA Cable Pushdown", "muscleGroup": "Triceps", "sets": [{"reps": "15", "weight": "22"}, {"isDrop": true, "stages": [{"reps": "15", "weight": "27"}, {"reps": "20", "weight": "22"}, {"reps": "25", "weight": "16.5"}]}]}]}, {"type": "standard", "exercises": [{"name": "SA Cable Curl", "muscleGroup": "Biceps", "sets": [{"reps": "20", "weight": "16.5"}, {"reps": "20", "weight": "16.5"}]}]}], "cardio": []}, {"id": "w-6d681a76", "userId": "clay", "date": "2026-07-26", "category": "Upper", "bodyWeight": 253, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "SB Flat Bench", "muscleGroup": "Chest", "sets": [{"reps": "8", "weight": "225"}, {"reps": "8", "weight": "225"}, {"isDrop": true, "stages": [{"reps": "6", "weight": "225"}, {"reps": "6", "weight": "185"}, {"reps": "8", "weight": "135"}]}]}]}, {"type": "superset", "exercises": [{"name": "DB Bent over Row", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}]}, {"name": "Ez Bar Curl", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "70"}, {"reps": "15", "weight": "70"}, {"reps": "15", "weight": "70"}]}]}, {"type": "superset", "exercises": [{"name": "Seated DB Hammer Curl", "muscleGroup": "Biceps", "sets": [{"reps": "10", "weight": "45"}, {"reps": "12", "weight": "45"}, {"isDrop": true, "stages": [{"reps": "12", "weight": "45"}, {"reps": "20", "weight": "25"}]}]}, {"name": "Curl Variation (unlabeled in source)", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "25"}, {"reps": "15", "weight": "25"}, {"reps": "15", "weight": "25"}]}]}, {"type": "superset", "exercises": [{"name": "Rope OH Tri Ext", "muscleGroup": "Triceps", "sets": [{"reps": "20", "weight": "50"}, {"reps": "20", "weight": "50"}, {"reps": "20", "weight": "50"}]}, {"name": "Cable Crunch", "muscleGroup": "Abs", "sets": [{"reps": "15", "weight": "88"}, {"reps": "15", "weight": "88"}, {"reps": "15", "weight": "88"}]}]}, {"type": "standard", "exercises": [{"name": "SA Cable Curl", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "22"}, {"reps": "12", "weight": "27.5"}, {"isDrop": true, "stages": [{"reps": "10", "weight": "27.5"}, {"reps": "15", "weight": "22"}, {"reps": "20", "weight": "16.5"}]}]}]}, {"type": "standard", "exercises": [{"name": "SA Cable Tri Pushdown", "muscleGroup": "Triceps", "sets": [{"isDrop": true, "stages": [{"reps": "25", "weight": "16.5"}, {"reps": "25", "weight": "16.5"}]}, {"reps": "25", "weight": "16.5"}]}]}, {"type": "standard", "exercises": [{"name": "Machine Curl", "muscleGroup": "Biceps", "sets": [{"isDrop": true, "stages": [{"reps": "15", "weight": "70"}, {"reps": "15", "weight": "40"}]}]}]}], "cardio": []}, {"id": "w-ce0ef3e5", "userId": "clay", "date": "2026-07-27", "category": "Legs", "bodyWeight": 251, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "superset", "exercises": [{"name": "Abductor", "muscleGroup": "Legs", "sets": [{"reps": "30", "weight": "100"}, {"reps": "25", "weight": "120"}]}, {"name": "Adductor", "muscleGroup": "Legs", "sets": [{"reps": "30", "weight": "80"}, {"reps": "25", "weight": "100"}]}]}, {"type": "standard", "exercises": [{"name": "SB Back Squats", "muscleGroup": "Legs", "sets": [{"reps": "15", "weight": "135"}, {"reps": "12", "weight": "185"}]}]}, {"type": "standard", "exercises": [{"name": "Elevated SB RDL", "muscleGroup": "Legs", "sets": [{"reps": "15", "weight": "135"}, {"reps": "15", "weight": "135"}]}]}, {"type": "standard", "exercises": [{"name": "Single Leg Quad Ext", "muscleGroup": "Legs", "sets": [{"reps": "10", "weight": "100"}, {"isDrop": true, "stages": [{"reps": "10", "weight": "100"}, {"reps": "10", "weight": "80"}]}, {"isDrop": true, "stages": [{"reps": "10", "weight": "100"}, {"reps": "10", "weight": "80"}, {"reps": "10", "weight": "50"}]}]}]}, {"type": "standard", "exercises": [{"name": "Seated Calf Raises", "muscleGroup": "Legs", "sets": [{"reps": "20", "weight": "70"}, {"reps": "20", "weight": "70"}, {"reps": "20", "weight": "70"}]}]}], "cardio": []}, {"id": "w-31014d74", "userId": "clay", "date": "2026-07-29", "category": "Back", "bodyWeight": 250, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "WG Lat Pull-down", "muscleGroup": "Back", "sets": [{"reps": "20", "weight": "121"}, {"reps": "15", "weight": "143"}, {"reps": "12", "weight": "165"}]}]}, {"type": "standard", "exercises": [{"name": "Hammer Strength Row", "muscleGroup": "Back", "sets": [{"reps": "12", "weight": "135"}, {"reps": "12", "weight": "135"}, {"reps": "15 (CG)", "weight": "90"}, {"reps": "15 (CG)", "weight": "90"}]}]}, {"type": "superset", "exercises": [{"name": "Back Extension", "muscleGroup": "Back", "sets": [{"reps": "10", "weight": "25"}, {"reps": "10", "weight": "25"}, {"reps": "10", "weight": "25"}]}, {"name": "DB Curl", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "30"}, {"reps": "15", "weight": "30"}, {"reps": "-", "weight": "-"}]}, {"name": "DB Hammer Curl", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "30"}, {"reps": "-", "weight": "-"}, {"reps": "15", "weight": "30"}]}]}, {"type": "superset", "exercises": [{"name": "St.A Pull-down", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "60"}, {"reps": "15", "weight": "60"}]}, {"name": "TTB", "muscleGroup": "Abs", "sets": [{"reps": "8", "weight": "-"}, {"reps": "8", "weight": "-"}]}]}, {"type": "standard", "exercises": [{"name": "SA Cable Curl", "muscleGroup": "Biceps", "sets": [{"isDrop": true, "stages": [{"reps": "15", "weight": "20"}, {"reps": "15", "weight": "15"}]}, {"reps": "-", "weight": "-"}]}]}], "cardio": []}, {"id": "w-705c9610", "userId": "clay", "date": "2026-07-30", "category": "Chest", "bodyWeight": 252, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "SB Incline Bench", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "135"}, {"reps": "10", "weight": "185"}, {"reps": "10", "weight": "185"}, {"reps": "8", "weight": "185"}]}]}, {"type": "superset", "exercises": [{"name": "Flat DB Press", "muscleGroup": "Chest", "sets": [{"reps": "12", "weight": "50"}, {"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}]}, {"name": "Plate Squeeze", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "25"}, {"reps": "15", "weight": "25"}, {"reps": "15", "weight": "25"}]}]}, {"type": "superset", "exercises": [{"name": "Vbar Cable OH Tri Ext", "muscleGroup": "Triceps", "sets": [{"reps": "20", "weight": "50"}, {"reps": "16", "weight": "55"}, {"reps": "20", "weight": "55"}]}, {"name": "Cable Crunch", "muscleGroup": "Abs", "sets": [{"reps": "12", "weight": "90"}, {"reps": "15", "weight": "85"}, {"reps": "15", "weight": "85"}]}]}, {"type": "standard", "exercises": [{"name": "SA Cable Tri Pushdown", "muscleGroup": "Triceps", "sets": [{"reps": "20", "weight": "20"}, {"reps": "20", "weight": "22"}, {"reps": "-", "weight": "-"}, {"reps": "20", "weight": "16.5"}]}]}], "cardio": []}, {"id": "w-964982d7", "userId": "clay", "date": "2026-08-01", "category": "Upper", "bodyWeight": 255, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "SB Incline Bench", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "135"}, {"reps": "10", "weight": "185"}, {"reps": "8", "weight": "205"}, {"reps": "8", "weight": "205"}]}]}, {"type": "superset", "exercises": [{"name": "DB Bent Over Row", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}]}, {"name": "Incline DB Curl", "muscleGroup": "Biceps", "sets": [{"reps": "12", "weight": "40"}, {"reps": "12", "weight": "40"}, {"reps": "12", "weight": "40"}]}]}, {"type": "superset", "exercises": [{"name": "SA Tri Pushdown", "muscleGroup": "Triceps", "sets": [{"reps": "20", "weight": "22"}, {"reps": "15", "weight": "27.5"}, {"isDrop": true, "stages": [{"reps": "10", "weight": "27.5"}, {"reps": "10", "weight": "22"}, {"reps": "10", "weight": "16.5"}]}]}, {"name": "TTB", "muscleGroup": "Abs", "sets": [{"reps": "8", "weight": "-"}, {"reps": "8", "weight": "-"}, {"reps": "8", "weight": "-"}]}]}, {"type": "superset", "exercises": [{"name": "Back Extensions", "muscleGroup": "Back", "sets": []}, {"name": "SB Rev Curl", "muscleGroup": "Biceps", "sets": []}]}], "cardio": [{"machine": "Treadmill", "time": "", "speed": "3 mph", "incline": "12"}]}, {"id": "w-c7a2931f", "userId": "clay", "date": "2026-08-03", "category": "Upper", "bodyWeight": 254, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "superset", "exercises": [{"name": "SB Incline Press", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "135"}, {"reps": "15", "weight": "135"}, {"reps": "15", "weight": "135"}]}, {"name": "Pull-ups", "muscleGroup": "Body", "sets": [{"reps": "5", "weight": "-"}, {"reps": "5", "weight": "-"}, {"reps": "5", "weight": "-"}]}]}, {"type": "superset", "exercises": [{"name": "Back Ext", "muscleGroup": "Back", "sets": [{"reps": "10", "weight": "25"}, {"reps": "10", "weight": "25"}, {"reps": "12", "weight": "25"}]}, {"name": "SA DB Tri OH Ext", "muscleGroup": "Triceps", "sets": [{"reps": "15", "weight": "30"}, {"reps": "15", "weight": "30"}, {"reps": "15", "weight": "30"}]}]}, {"type": "standard", "exercises": [{"name": "SB Cable Tri Pushdown", "muscleGroup": "Triceps", "sets": [{"reps": "30", "weight": "50"}, {"reps": "20", "weight": "60"}, {"isDrop": true, "stages": [{"reps": "10", "weight": "70"}, {"reps": "10", "weight": "60"}, {"reps": "10", "weight": "50"}]}]}]}], "cardio": []}, {"id": "w-ea4573cc", "userId": "clay", "date": "2026-08-04", "category": "Upper", "bodyWeight": 252, "startTime": null, "endTime": null, "notes": "Upper 2", "blocks": [{"type": "standard", "exercises": [{"name": "Machine High Row", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "45"}, {"reps": "12", "weight": "90"}, {"reps": "8", "weight": "115"}]}]}, {"type": "standard", "exercises": [{"name": "SB Flat Bench", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "135"}, {"reps": "12", "weight": "185"}, {"reps": "10", "weight": "225"}]}]}, {"type": "standard", "exercises": [{"name": "Incline DB Curl", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "35"}, {"reps": "15", "weight": "35"}, {"isDrop": true, "stages": [{"reps": "15", "weight": "35"}, {"reps": "15", "weight": "25"}]}]}]}, {"type": "superset", "exercises": [{"name": "St.A pull-down", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}]}, {"name": "TTB", "muscleGroup": "Abs", "sets": [{"reps": "5", "weight": "-"}, {"reps": "5", "weight": "-"}]}]}, {"type": "standard", "exercises": [{"name": "EZ Rev Cable Curl", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "50"}, {"reps": "15", "weight": "50"}]}]}], "cardio": []}, {"id": "w-3a89996a", "userId": "clay", "date": "2026-08-06", "category": "Legs", "bodyWeight": 253, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "SL Hamstring Curls", "muscleGroup": "Legs", "sets": [{"reps": "20", "weight": "30"}, {"reps": "20", "weight": "30"}]}]}, {"type": "standard", "exercises": [{"name": "SL Quad Extension", "muscleGroup": "Legs", "sets": [{"reps": "20", "weight": "50"}, {"reps": "20", "weight": "60"}]}]}, {"type": "standard", "exercises": [{"name": "SB RDL", "muscleGroup": "Legs", "sets": [{"reps": "20", "weight": "135"}, {"reps": "20", "weight": "135"}]}]}, {"type": "standard", "exercises": [{"name": "SB Back Squat", "muscleGroup": "Legs", "sets": [{"reps": "10", "weight": "135"}, {"reps": "10", "weight": "135"}]}]}, {"type": "standard", "exercises": [{"name": "Seated Calf Raise", "muscleGroup": "Legs", "sets": [{"reps": "15", "weight": "90"}, {"reps": "15", "weight": "90"}]}]}], "cardio": [{"machine": "Row Machine", "time": "3:37 min", "totalDistance": "1019 meters", "avgSplit": "1:46.6 avg/500m (33 spm)"}]}, {"id": "w-4be795b5", "userId": "clay", "date": "2026-08-09", "category": "Upper", "bodyWeight": 254, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "Pull-ups", "muscleGroup": "Body", "sets": [{"reps": "6", "weight": "-"}, {"reps": "6", "weight": "-"}]}]}, {"type": "standard", "exercises": [{"name": "SB Incline Bench", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "135"}, {"reps": "10", "weight": "195"}, {"isDrop": true, "stages": [{"reps": "9", "weight": "205"}, {"reps": "10", "weight": "135"}]}]}]}, {"type": "superset", "exercises": [{"name": "DB Bent over row", "muscleGroup": "Back", "sets": [{"reps": "10", "weight": "85"}, {"reps": "10", "weight": "85"}, {"reps": "10", "weight": "85"}]}, {"name": "Incline DB Curl", "muscleGroup": "Biceps", "sets": [{"reps": "12", "weight": "40"}, {"reps": "10", "weight": "40"}, {"isDrop": true, "stages": [{"reps": "10", "weight": "40"}, {"reps": "20", "weight": "25"}]}]}]}, {"type": "superset", "exercises": [{"name": "SB Skull Crusher", "muscleGroup": "Triceps", "sets": [{"reps": "15", "weight": "90"}, {"reps": "15", "weight": "90"}, {"reps": "15", "weight": "90"}]}, {"name": "DB Standing Fly", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "25"}, {"reps": "15", "weight": "25"}, {"reps": "15", "weight": "25"}]}]}, {"type": "superset", "exercises": [{"name": "Bench Dip", "muscleGroup": "Triceps", "sets": [{"reps": "15", "weight": "-"}, {"reps": "15", "weight": "-"}]}, {"name": "DB Hammer Curl", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "40"}, {"reps": "15", "weight": "40"}]}]}, {"type": "standard", "exercises": [{"name": "WG (Black) Lat Pulldowns", "muscleGroup": "Back", "sets": [{"reps": "12", "weight": "148"}, {"reps": "12", "weight": "148"}, {"reps": "12", "weight": "148"}]}]}, {"type": "superset", "exercises": [{"name": "SA Cable Tri Pushdown", "muscleGroup": "Triceps", "sets": [{"reps": "15", "weight": "22"}, {"reps": "15", "weight": "22"}, {"isDrop": true, "stages": [{"reps": "15", "weight": "22"}, {"reps": "15", "weight": "16.5"}]}]}, {"name": "TTB", "muscleGroup": "Abs", "sets": [{"reps": "5", "weight": "-"}, {"reps": "5", "weight": "-"}, {"reps": "5", "weight": "-"}]}]}, {"type": "standard", "exercises": [{"name": "SA Cable Curl", "muscleGroup": "Biceps", "sets": [{"reps": "20", "weight": "16.5"}]}]}], "cardio": []}, {"id": "w-ebbed435", "userId": "clay", "date": "2026-08-16", "category": "Chest", "bodyWeight": 265, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "SB Flat Bench", "muscleGroup": "Chest", "sets": [{"reps": "10", "weight": "225"}, {"reps": "5", "weight": "255"}, {"reps": "3", "weight": "275"}]}]}, {"type": "standard", "exercises": [{"name": "Low Cable Fly", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "20"}, {"reps": "15", "weight": "20"}]}]}, {"type": "standard", "exercises": [{"name": "Mid Cable Fly", "muscleGroup": "Chest", "sets": [{"reps": "15", "weight": "20"}, {"reps": "15", "weight": "20"}]}]}, {"type": "standard", "exercises": [{"name": "Decline Machine Press", "muscleGroup": "Chest", "sets": [{"reps": "20", "weight": "45"}, {"reps": "12", "weight": "90"}, {"reps": "12", "weight": "90"}]}]}, {"type": "superset", "exercises": [{"name": "DB Incline Press", "muscleGroup": "Chest", "sets": [{"reps": "10", "weight": "90"}, {"reps": "9", "weight": "90"}, {"reps": "9", "weight": "90"}]}, {"name": "DB Curls (Norm&Hammer)", "muscleGroup": "Biceps", "sets": [{"reps": "30", "weight": "30"}, {"reps": "30", "weight": "30"}, {"reps": "20", "weight": "40"}]}]}, {"type": "standard", "exercises": [{"name": "SB Cable Tri Pushdown", "muscleGroup": "Triceps", "sets": [{"reps": "20", "weight": "71"}, {"reps": "15", "weight": "77"}, {"isDrop": true, "stages": [{"reps": "10", "weight": "77"}, {"reps": "10", "weight": "55"}, {"reps": "10", "weight": "33"}]}]}]}, {"type": "standard", "exercises": [{"name": "Cable Tri Kickback", "muscleGroup": "Triceps", "sets": [{"reps": "12", "weight": "22"}, {"reps": "15", "weight": "16.5"}, {"reps": "15", "weight": "16.5"}]}]}], "cardio": []}, {"id": "w-500a2188", "userId": "clay", "date": "2026-08-18", "category": "Legs", "bodyWeight": 256, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "Leg Extension", "muscleGroup": "Legs", "sets": [{"reps": "12", "weight": "220"}, {"isDrop": true, "stages": [{"reps": "10", "weight": "260"}, {"reps": "10", "weight": "160"}, {"reps": "10", "weight": "60"}]}]}]}, {"type": "standard", "exercises": [{"name": "SB Elevated RDL", "muscleGroup": "Legs", "sets": [{"reps": "12", "weight": "135"}, {"reps": "10", "weight": "185"}, {"reps": "8", "weight": "225"}]}]}, {"type": "standard", "exercises": [{"name": "Leg Press", "muscleGroup": "Legs", "sets": [{"reps": "12", "weight": "370"}, {"reps": "12", "weight": "370"}, {"reps": "12", "weight": "370"}]}]}], "cardio": [{"machine": "Treadmill", "time": "25 min", "speed": "3 mph", "incline": "12"}]}, {"id": "w-c68396cc", "userId": "clay", "date": "2026-08-19", "category": "Back", "bodyWeight": 254, "startTime": null, "endTime": null, "notes": "", "blocks": [{"type": "standard", "exercises": [{"name": "WG Lat Pull-down", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "143"}, {"reps": "12", "weight": "165"}, {"reps": "10", "weight": "187"}]}]}, {"type": "standard", "exercises": [{"name": "Hammer Strength Row", "muscleGroup": "Back", "sets": [{"reps": "12", "weight": "135"}, {"reps": "12", "weight": "135"}, {"reps": "12 (CG)", "weight": "135"}, {"reps": "12 (CG)", "weight": "135"}]}]}, {"type": "standard", "exercises": [{"name": "Incline DB Curl", "muscleGroup": "Biceps", "sets": [{"reps": "12", "weight": "40"}, {"reps": "12", "weight": "40"}, {"reps": "12-15p15", "weight": "40-25"}]}]}, {"type": "superset", "exercises": [{"name": "Back Extension", "muscleGroup": "Back", "sets": [{"reps": "10", "weight": "25"}, {"reps": "10", "weight": "25"}, {"reps": "10", "weight": "25"}]}, {"name": "DB Hammer Curl", "muscleGroup": "Biceps", "sets": [{"reps": "15", "weight": "30"}, {"reps": "-", "weight": "-"}, {"reps": "15", "weight": "30"}]}]}, {"type": "superset", "exercises": [{"name": "St.A Pull-down", "muscleGroup": "Back", "sets": [{"reps": "15", "weight": "60"}, {"reps": "15", "weight": "60"}]}, {"name": "Cable Crunch", "muscleGroup": "Abs", "sets": [{"reps": "15", "weight": "90"}, {"reps": "15", "weight": "90"}]}]}, {"type": "standard", "exercises": [{"name": "SA Cable Curl", "muscleGroup": "Biceps", "sets": [{"reps": "20", "weight": "20"}, {"isDrop": true, "stages": [{"reps": "20", "weight": "20"}, {"reps": "20", "weight": "15"}]}]}]}], "cardio": []}], "events": [{"id": "e-8c753f82", "userId": "clay", "date": "2026-04-10", "title": "Stillwater 500 Ride", "notes": ""}, {"id": "e-4e187403", "userId": "clay", "date": "2026-08-02", "title": "Stillwater Ride Day", "notes": ""}, {"id": "e-a0171cd6", "userId": "clay", "date": "2026-08-08", "title": "Draper", "notes": ""}, {"id": "e-17b80a88", "userId": "clay", "date": "2026-08-17", "title": "Draper", "notes": "Routes: 1 Red, 1.5 Blue"}], "bodyWeights": []}; /* replaced at build time with the seed / current state */
+
+/* ---------------- small utilities ---------------- */
+function uid(p) { return p + '-' + Math.random().toString(36).slice(2, 10); }
+function pad2(n) { return String(n).padStart(2, '0'); }
+function clamp(n, lo, hi) { return Math.max(lo, Math.min(hi, n)); }
+function deepClone(o) { return JSON.parse(JSON.stringify(o)); }
+function escapeHtml(s) {
+  if (s === null || s === undefined) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+}
+function todayStr() { var d = new Date(); return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+function parseYMD(s) { var p = s.split('-').map(Number); return { y: p[0], m: p[1], d: p[2] }; }
+function daysInMonth(y, m) { return new Date(y, m, 0).getDate(); }
+function firstWeekday(y, m) { return new Date(y, m - 1, 1).getDay(); }
+var MONTH_NAMES = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var WEEKDAY_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+function addMonths(y, m, delta) { var idx = y * 12 + (m - 1) + delta; var ny = Math.floor(idx / 12); var nm = (idx % 12) + 1; return { y: ny, m: nm }; }
+function fmtMonthYear(y, m) { return MONTH_NAMES[m - 1] + ' ' + y; }
+function fmtDateLong(s) { var p = parseYMD(s); var dt = new Date(p.y, p.m - 1, p.d); return dt.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }); }
+function fmtDateShort(s) { var p = parseYMD(s); var dt = new Date(p.y, p.m - 1, p.d); return dt.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }); }
+function nowTimeStr() { var d = new Date(); return pad2(d.getHours()) + ':' + pad2(d.getMinutes()); }
+function fmtTime12(hhmm) {
+  if (!hhmm) return '';
+  var parts = hhmm.split(':'); var h = Number(parts[0]), m = Number(parts[1]);
+  var ap = h >= 12 ? 'PM' : 'AM'; var hh = h % 12; if (hh === 0) hh = 12;
+  return hh + ':' + pad2(m) + ' ' + ap;
+}
+function daysAgoStr(n) { var d = new Date(); d.setDate(d.getDate() - n); return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+function dateOffset(s, deltaDays) { var p = parseYMD(s); var d = new Date(p.y, p.m - 1, p.d); d.setDate(d.getDate() + deltaDays); return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()); }
+
+var CATEGORIES = ['Upper', 'Lower', 'Chest', 'Back', 'Shoulders', 'Legs', 'Cardio'];
+var MUSCLE_GROUPS = ['Chest', 'Back', 'Shoulders', 'Legs', 'Biceps', 'Triceps', 'Traps', 'Abs', 'Body'];
+var CARDIO_MACHINES = ['Treadmill', 'Row Machine', 'Bike', 'Other'];
+
+/* ---------------- global mutable app state ---------------- */
+var UI = { currentUserId: null, year: 0, month: 0, selectedDate: null, modal: null, toast: null, initialized: false };
+var DRAFT = null;
+var toastTimer = null;
+var STORAGE_KEY = 'workoutbook_state_v1';
+
+/* ---------------- persistence: localStorage, on this device only ---------------- */
+function saveLocalBackup(state) {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); return true; } catch (e) { return false; }
+}
+function loadLocalIfPresent() {
+  try {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) { STATE = JSON.parse(raw); }
+    else { saveLocalBackup(STATE); }
+  } catch (e) { /* keep embedded seed */ }
+}
+
+function persist(newState) {
+  STATE = newState;
+  var ok = saveLocalBackup(STATE);
+  if (!ok) { showToast("Couldn't save — this device's storage may be full or private browsing is blocking it."); }
+  render();
+}
+
+function showToast(msg) {
+  UI.toast = msg;
+  render();
+  if (toastTimer) clearTimeout(toastTimer);
+  toastTimer = setTimeout(function () { UI.toast = null; render(); }, 3200);
+}
+
+function initPersistence() {
+  loadLocalIfPresent();
+  UI.initialized = true;
+  initUiFromHash();
+  render();
+}
+
+/* ---------------- backup: export / import a .json snapshot ---------------- */
+function downloadViaBlob(filename, json) {
+  var blob = new Blob([json], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
+}
+
+function exportBackup() {
+  var payload = { app: 'workout-book', exportedAt: nowStampStr(), state: STATE };
+  var json = JSON.stringify(payload, null, 2);
+  var filename = 'workout-book-backup-' + todayStr() + '.json';
+
+  /* Inside the Claude artifact viewer, plain <a download> links are inert —
+     file offers go through the `downloads` capability instead. Outside it
+     (the standalone HTML file), window.claude doesn't exist at all, so this
+     falls straight through to the ordinary blob-download trick. */
+  if (typeof window !== 'undefined' && window.claude && typeof window.claude.use === 'function') {
+    window.claude.use('downloads').then(function (downloads) {
+      if (!downloads) { downloadViaBlob(filename, json); showToast('Backup downloaded.'); return; }
+      downloads.save({ filename: filename, data: json }).then(function () {
+        showToast('Backup downloaded.');
+      }, function (err) {
+        if (err && err.code === 'declined') { showToast('Backup canceled.'); }
+        else { showToast("Couldn't save the backup file — try again."); }
+      });
+    }, function () {
+      try { downloadViaBlob(filename, json); showToast('Backup downloaded.'); }
+      catch (e) { showToast("Couldn't create a backup file on this device."); }
+    });
+    return;
+  }
+
+  try {
+    downloadViaBlob(filename, json);
+    showToast('Backup downloaded.');
+  } catch (e) {
+    showToast("Couldn't create a backup file on this device.");
+  }
+}
+
+function nowStampStr() {
+  var d = new Date();
+  return d.getFullYear() + '-' + pad2(d.getMonth() + 1) + '-' + pad2(d.getDate()) + ' ' + pad2(d.getHours()) + ':' + pad2(d.getMinutes());
+}
+
+function triggerImportPicker() {
+  var input = ensureImportInput();
+  input.click();
+}
+
+function handleImportFile(file) {
+  if (!file) return;
+  var reader = new FileReader();
+  reader.onload = function () {
+    var parsed;
+    try { parsed = JSON.parse(String(reader.result)); } catch (e) { showToast('That file is not a valid backup.'); return; }
+    var incoming = (parsed && parsed.state && parsed.app === 'workout-book') ? parsed.state : parsed;
+    if (!incoming || !Array.isArray(incoming.users) || !Array.isArray(incoming.workouts)) {
+      showToast('That file is not a valid Workout Book backup.');
+      return;
+    }
+    var result = mergeStates(STATE, incoming);
+    UI.modal = null;
+    persist(result.state);
+    showToast('Backup merged — ' + result.added + ' new, ' + result.updated + ' updated.');
+  };
+  reader.onerror = function () { showToast('Could not read that file.'); };
+  reader.readAsText(file);
+}
+
+function mergeBysId(existingArr, incomingArr) {
+  var byId = {};
+  existingArr.forEach(function (x) { byId[x.id] = x; });
+  var added = 0, updated = 0;
+  incomingArr.forEach(function (x) {
+    if (!x || !x.id) return;
+    if (byId[x.id]) { updated++; } else { added++; }
+    byId[x.id] = x;
+  });
+  return { list: Object.keys(byId).map(function (k) { return byId[k]; }), added: added, updated: updated };
+}
+
+function mergeStates(current, incoming) {
+  var counts = { added: 0, updated: 0 };
+  var users = mergeBysId(current.users || [], incoming.users || []); counts.added += users.added; counts.updated += users.updated;
+  var workouts = mergeBysId(current.workouts || [], incoming.workouts || []); counts.added += workouts.added; counts.updated += workouts.updated;
+  var events = mergeBysId(current.events || [], incoming.events || []); counts.added += events.added; counts.updated += events.updated;
+  var bodyWeights = mergeBysId(current.bodyWeights || [], incoming.bodyWeights || []); counts.added += bodyWeights.added; counts.updated += bodyWeights.updated;
+  var exercises = deepClone(current.exercises || {});
+  Object.keys(incoming.exercises || {}).forEach(function (g) {
+    if (!exercises[g]) exercises[g] = [];
+    (incoming.exercises[g] || []).forEach(function (n) { if (exercises[g].indexOf(n) === -1) exercises[g].push(n); });
+  });
+  return {
+    state: { users: users.list, workouts: workouts.list, events: events.list, bodyWeights: bodyWeights.list, exercises: exercises },
+    added: counts.added, updated: counts.updated
+  };
+}
+
+/* ---------------- hash / ui state ---------------- */
+function initUiFromHash() {
+  var h = location.hash.replace(/^#/, '');
+  var params = new URLSearchParams(h);
+  var u = params.get('u'), m = params.get('m'), d = params.get('d');
+  var today = todayStr();
+  UI.currentUserId = (u && STATE.users.some(function (x) { return x.id === u; })) ? u : (STATE.users.length === 1 ? STATE.users[0].id : null);
+  if (m && /^\d{4}-\d{2}$/.test(m)) { var mm = m.split('-'); UI.year = Number(mm[0]); UI.month = Number(mm[1]); }
+  else { var p = parseYMD(today); UI.year = p.y; UI.month = p.m; }
+  if (d && /^\d{4}-\d{2}-\d{2}$/.test(d) && UI.currentUserId) {
+    UI.selectedDate = d;
+    UI.modal = { type: 'dayDetail', date: d };
+  }
+}
+function writeHash() {
+  var params = new URLSearchParams();
+  if (UI.currentUserId) params.set('u', UI.currentUserId);
+  params.set('m', UI.year + '-' + pad2(UI.month));
+  if (UI.selectedDate) params.set('d', UI.selectedDate);
+  history.replaceState(null, '', '#' + params.toString());
+}
+
+/* ---------------- data queries ---------------- */
+function userWorkouts(userId) { return STATE.workouts.filter(function (w) { return w.userId === userId; }); }
+function userEvents(userId) { return STATE.events.filter(function (e) { return e.userId === userId; }); }
+function workoutsOnDate(userId, date) { return userWorkouts(userId).filter(function (w) { return w.date === date; }); }
+function eventsOnDate(userId, date) { return userEvents(userId).filter(function (e) { return e.date === date; }); }
+function monthWorkoutCount(userId, y, m) {
+  var prefix = y + '-' + pad2(m);
+  return userWorkouts(userId).filter(function (w) { return w.date.indexOf(prefix) === 0; }).length;
+}
+function userBodyWeights(userId) { return (STATE.bodyWeights || []).filter(function (b) { return b.userId === userId; }); }
+function standaloneBodyWeightFor(userId, date) {
+  return userBodyWeights(userId).find(function (b) { return b.date === date; }) || null;
+}
+function bodyWeightEntries(userId) {
+  var byDate = {};
+  userWorkouts(userId).forEach(function (w) {
+    if (w.bodyWeight !== null && w.bodyWeight !== undefined && w.bodyWeight !== '') {
+      byDate[w.date] = { date: w.date, weight: Number(w.bodyWeight), source: 'workout' };
+    }
+  });
+  userBodyWeights(userId).forEach(function (b) {
+    if (!byDate[b.date]) byDate[b.date] = { date: b.date, weight: Number(b.weight), source: 'standalone' };
+  });
+  return Object.keys(byDate).map(function (d) { return byDate[d]; }).sort(function (a, b) { return a.date < b.date ? -1 : 1; });
+}
+function weeklyAvgBodyWeight(userId) {
+  var entries = bodyWeightEntries(userId);
+  if (!entries.length) return null;
+  var today = todayStr(), start = daysAgoStr(6);
+  var inWindow = entries.filter(function (e) { return e.date >= start && e.date <= today; });
+  if (inWindow.length) {
+    var sum = inWindow.reduce(function (a, e) { return a + e.weight; }, 0);
+    return { avg: sum / inWindow.length, count: inWindow.length, mode: 'week' };
+  }
+  var last = entries[entries.length - 1];
+  return { avg: last.weight, count: 1, mode: 'last', date: last.date };
+}
+function recentTemplates(userId, category, excludeId) {
+  return userWorkouts(userId)
+    .filter(function (w) { return w.category === category && w.id !== excludeId && w.blocks && w.blocks.length; })
+    .sort(function (a, b) { return a.date < b.date ? 1 : -1; })
+    .slice(0, 3);
+}
+function exerciseGroupOf(name) {
+  var groups = Object.keys(STATE.exercises);
+  for (var i = 0; i < groups.length; i++) {
+    if (STATE.exercises[groups[i]].indexOf(name) !== -1) return groups[i];
+  }
+  return null;
+}
+function allExerciseNames() {
+  var set = {};
+  Object.keys(STATE.exercises).forEach(function (g) { STATE.exercises[g].forEach(function (n) { set[n] = true; }); });
+  return Object.keys(set).sort();
+}
+
+/* ====================================================================
+   RENDERING
+   ==================================================================== */
+function render() {
+  var root = document.getElementById('app');
+  if (!root) return;
+  var html = renderTopbar();
+  html += UI.currentUserId ? renderDashboard() : renderUserSelect();
+  html += renderModal();
+  html += renderToast();
+  root.innerHTML = html;
+  writeHash();
+}
+
+function renderToast() {
+  if (!UI.toast) return '';
+  return '<div class="toast">' + escapeHtml(UI.toast) + '</div>';
+}
+
+function currentUser() {
+  return STATE.users.find(function (u) { return u.id === UI.currentUserId; }) || null;
+}
+function initials(name) {
+  return (name || '?').trim().split(/\s+/).map(function (w) { return w[0]; }).slice(0, 2).join('').toUpperCase();
+}
+
+function renderTopbar() {
+  var user = currentUser();
+  var right = '<div class="topbar-right">';
+  right += '<span class="sync-pill local"><span class="sync-dot"></span><span class="sync-label">On this device</span></span>';
+  right += '<button class="icon-btn" data-action="openBackup" title="Backup &amp; restore">&#8593;&#8595;</button>';
+  if (user) {
+    right += '<button class="icon-btn" data-action="openExerciseLibrary" title="Exercise library">&#9776;</button>';
+    right += '<button class="user-chip" data-action="switchUser"><span class="user-avatar">' + escapeHtml(initials(user.name)) + '</span><span class="user-name-label">' + escapeHtml(user.name) + '</span></button>';
+  }
+  right += '</div>';
+  return '<div class="topbar"><div class="brand"><span class="brand-mark">Workout <span class="accent">Book</span></span></div>' + right + '</div>';
+}
+
+function renderUserSelect() {
+  var cards = STATE.users.map(function (u) {
+    var wc = userWorkouts(u.id).length;
+    return '<button class="user-card" data-action="selectUser" data-user="' + u.id + '">' +
+      '<span class="user-avatar">' + escapeHtml(initials(u.name)) + '</span>' +
+      '<span class="user-card-name">' + escapeHtml(u.name) + '</span>' +
+      '<span class="user-card-sub">' + wc + ' workout' + (wc === 1 ? '' : 's') + ' logged</span>' +
+      '</button>';
+  }).join('');
+  cards += '<button class="user-card-add" data-action="promptAddUser"><span style="font-size:26px;line-height:1">+</span><span>Add lifter</span></button>';
+  return '<div class="user-select-view"><h1>Who&rsquo;s lifting?</h1><div class="user-grid">' + cards + '</div></div>';
+}
+
+function renderDashboard() {
+  var user = currentUser();
+  var wCount = monthWorkoutCount(user.id, UI.year, UI.month);
+  var wk = weeklyAvgBodyWeight(user.id);
+  var out = '<div class="dashboard">';
+  out += '<div class="dash-grid">';
+  out += '<div class="card">' + renderMonthNav() + renderCalendar(user.id) + '</div>';
+  out += '<div style="display:flex;flex-direction:column;gap:18px;">';
+  out += renderStatsCard(user.id, wCount, wk);
+  out += renderChartCard(user.id);
+  out += '</div>';
+  out += '</div>';
+  out += '</div>';
+  out += '<div class="fab-row">';
+  out += '<button class="fab fab-secondary" data-action="newEvent" data-date="' + todayStr() + '">+ Special Event</button>';
+  out += '<button class="fab" data-action="newWorkout" data-date="' + todayStr() + '">+ Log Workout</button>';
+  out += '</div>';
+  return out;
+}
+
+function renderMonthNav() {
+  return '<div class="month-nav">' +
+    '<div class="month-nav-controls"><button class="icon-btn" data-action="prevMonth">&#8249;</button></div>' +
+    '<h2>' + fmtMonthYear(UI.year, UI.month) + '</h2>' +
+    '<div class="month-nav-controls"><button class="btn btn-ghost btn-sm" data-action="goToday">Today</button><button class="icon-btn" data-action="nextMonth">&#8250;</button></div>' +
+    '</div>';
+}
+
+function renderCalendar(userId) {
+  var y = UI.year, m = UI.month;
+  var first = firstWeekday(y, m);
+  var total = daysInMonth(y, m);
+  var prev = addMonths(y, m, -1);
+  var prevTotal = daysInMonth(prev.y, prev.m);
+  var today = todayStr();
+  var cells = '';
+  var wk = '<div class="calendar-weekdays">' + WEEKDAY_SHORT.map(function (d) { return '<span>' + d + '</span>'; }).join('') + '</div>';
+  var n = 0;
+  for (var i = first - 1; i >= 0; i--) { n++; cells += dayCellHtml(prev.y, prev.m, prevTotal - i, true, userId, today); }
+  for (var d = 1; d <= total; d++) { n++; cells += dayCellHtml(y, m, d, false, userId, today); }
+  var next = addMonths(y, m, 1);
+  var d2 = 1;
+  while (n % 7 !== 0) { cells += dayCellHtml(next.y, next.m, d2, true, userId, today); d2++; n++; }
+  return wk + '<div class="calendar-grid">' + cells + '</div>';
+}
+
+function dayCellHtml(y, m, d, outside, userId, today) {
+  var dateStr = y + '-' + pad2(m) + '-' + pad2(d);
+  var hasWorkout = workoutsOnDate(userId, dateStr).length > 0;
+  var hasEvent = eventsOnDate(userId, dateStr).length > 0;
+  var classes = 'day-cell' + (outside ? ' outside' : ' interactive') + (dateStr === today ? ' today' : '');
+  var dots = '';
+  if (!outside && (hasWorkout || hasEvent)) {
+    dots = '<span class="day-dots">' + (hasWorkout ? '<span class="dot dot-workout"></span>' : '') + (hasEvent ? '<span class="dot dot-event"></span>' : '') + '</span>';
+  }
+  var attrs = outside ? '' : ' data-action="openDay" data-date="' + dateStr + '"';
+  var tag = outside ? 'div' : 'button';
+  return '<' + tag + ' class="' + classes + '"' + attrs + '><span class="day-num">' + d + '</span>' + dots + '</' + tag + '>';
+}
+
+function renderStatsCard(userId, wCount, wk) {
+  var wkHtml;
+  if (!wk) { wkHtml = '<div class="stat-value">—</div><div class="stat-sub">No body weight logged yet</div>'; }
+  else if (wk.mode === 'week') { wkHtml = '<div class="stat-value">' + wk.avg.toFixed(1) + ' <span style="font-size:15px;color:var(--text-faint);">lb</span></div><div class="stat-sub">Weekly avg &middot; ' + wk.count + ' reading' + (wk.count === 1 ? '' : 's') + '</div>'; }
+  else { wkHtml = '<div class="stat-value">' + wk.avg.toFixed(1) + ' <span style="font-size:15px;color:var(--text-faint);">lb</span></div><div class="stat-sub">Last logged ' + fmtDateShort(wk.date) + '</div>'; }
+  return '<div class="card"><div class="stat-row">' +
+    '<div class="stat-tile"><div class="card-title">This month</div><div class="stat-value">' + wCount + '</div><div class="stat-sub">workout' + (wCount === 1 ? '' : 's') + ' logged</div></div>' +
+    '<div class="stat-tile"><div class="card-title">Body weight</div>' + wkHtml + '</div>' +
+    '</div></div>';
+}
+
+function renderChartCard(userId) {
+  var entries = bodyWeightEntries(userId).filter(function (e) { return e.date >= daysAgoStr(29); });
+  var body;
+  if (entries.length < 2) {
+    body = '<div class="empty-state" style="padding:18px 6px;">Log body weight on a few workouts to see your trend.</div>';
+  } else {
+    body = weightChartSvg(entries);
+  }
+  return '<div class="card"><div class="card-title">Last 30 days &middot; body weight</div>' + body + '</div>';
+}
+
+function weightChartSvg(entries) {
+  var W = 300, H = 110, padL = 4, padR = 4, padT = 10, padB = 4;
+  var weights = entries.map(function (e) { return e.weight; });
+  var minW = Math.min.apply(null, weights), maxW = Math.max.apply(null, weights);
+  if (minW === maxW) { minW -= 2; maxW += 2; }
+  var span = maxW - minW;
+  minW -= span * 0.15; maxW += span * 0.15;
+  var end = todayStr(), start = daysAgoStr(29);
+  var totalDays = 29;
+  function xFor(dateStr) {
+    var p1 = parseYMD(start), p2 = parseYMD(dateStr);
+    var d1 = new Date(p1.y, p1.m - 1, p1.d), d2 = new Date(p2.y, p2.m - 1, p2.d);
+    var offset = Math.round((d2 - d1) / 86400000);
+    return padL + (offset / totalDays) * (W - padL - padR);
+  }
+  function yFor(w) { return padT + (1 - (w - minW) / (maxW - minW)) * (H - padT - padB); }
+  var pts = entries.map(function (e) { return { x: xFor(e.date), y: yFor(e.weight), e: e }; });
+  var linePath = pts.map(function (p, i) { return (i === 0 ? 'M' : 'L') + p.x.toFixed(1) + ',' + p.y.toFixed(1); }).join(' ');
+  var areaPath = linePath + ' L' + pts[pts.length - 1].x.toFixed(1) + ',' + (H - padB) + ' L' + pts[0].x.toFixed(1) + ',' + (H - padB) + ' Z';
+  var dots = pts.map(function (p, i) {
+    var isLast = i === pts.length - 1;
+    return '<circle cx="' + p.x.toFixed(1) + '" cy="' + p.y.toFixed(1) + '" r="' + (isLast ? 3.2 : 2) + '" fill="' + (isLast ? 'var(--accent)' : 'var(--surface)') + '" stroke="var(--accent)" stroke-width="1.4"><title>' + escapeHtml(fmtDateShort(p.e.date)) + ': ' + p.e.weight + ' lb</title></circle>';
+  }).join('');
+  var svg = '<svg viewBox="0 0 ' + W + ' ' + H + '" style="width:100%;height:auto;display:block;" preserveAspectRatio="none">' +
+    '<defs><linearGradient id="wbGrad" x1="0" y1="0" x2="0" y2="1">' +
+    '<stop offset="0%" stop-color="var(--accent)" stop-opacity="0.28"/>' +
+    '<stop offset="100%" stop-color="var(--accent)" stop-opacity="0"/></linearGradient></defs>' +
+    '<path d="' + areaPath + '" fill="url(#wbGrad)" stroke="none"/>' +
+    '<path d="' + linePath + '" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>' +
+    dots + '</svg>';
+  var capt = '<div class="chart-caption"><span>' + maxW.toFixed(0) + ' lb</span><span>' + minW.toFixed(0) + ' lb</span></div>';
+  return '<div class="chart-wrap">' + svg + capt + '</div>';
+}
+
+/* ---------------- modal dispatcher ---------------- */
+function renderModal() {
+  if (!UI.modal) return '';
+  var m = UI.modal;
+  var inner = '';
+  if (m.type === 'dayDetail') inner = renderDayDetailModal(m.date);
+  else if (m.type === 'workoutBuilder') inner = renderWorkoutBuilderModal();
+  else if (m.type === 'eventForm') inner = renderEventFormModal(m);
+  else if (m.type === 'addUser') inner = renderAddUserModal();
+  else if (m.type === 'exerciseLibrary') inner = renderExerciseLibraryModal();
+  else if (m.type === 'bodyWeightForm') inner = renderBodyWeightFormModal(m);
+  else if (m.type === 'backup') inner = renderBackupModal();
+  else if (m.type === 'confirm') inner = renderConfirmModal(m);
+  if (!inner) return '';
+  return '<div class="modal-overlay" data-action="overlayClick">' + inner + '</div>';
+}
+
+function modalShell(title, bodyHtml, footerHtml) {
+  return '<div class="modal" data-stop="1">' +
+    '<div class="modal-header"><h3>' + title + '</h3><button class="icon-btn" data-action="closeModal">&#10005;</button></div>' +
+    '<div class="modal-body">' + bodyHtml + '</div>' +
+    (footerHtml ? '<div class="modal-footer">' + footerHtml + '</div>' : '') +
+    '</div>';
+}
+
+function renderConfirmModal(m) {
+  return modalShell('Please confirm',
+    '<p>' + escapeHtml(m.message) + '</p>',
+    '<button class="btn" data-action="closeModal">Cancel</button><button class="btn btn-danger" data-action="confirmProceed" data-id="' + m.id + '">' + escapeHtml(m.confirmLabel || 'Delete') + '</button>');
+}
+
+/* ---------------- day detail ---------------- */
+function renderDayDetailModal(date) {
+  var user = currentUser();
+  var workouts = workoutsOnDate(user.id, date);
+  var events = eventsOnDate(user.id, date);
+  var workoutBW = workouts.find(function (w) { return w.bodyWeight !== null && w.bodyWeight !== undefined && w.bodyWeight !== ''; });
+  var standaloneBW = standaloneBodyWeightFor(user.id, date);
+  var body = renderBodyWeightRow(date, workoutBW, standaloneBW);
+  if (!workouts.length && !events.length) {
+    body += '<div class="empty-state"><span style="font-size:26px;">&#128203;</span><div>No workout or event logged this day yet.</div></div>';
+  }
+  workouts.forEach(function (w) { body += renderWorkoutSummary(w); });
+  events.forEach(function (ev) { body += renderEventSummary(ev); });
+  body += '<div class="row-actions" style="margin-top:6px;">' +
+    '<button class="btn btn-accent btn-sm" data-action="newWorkout" data-date="' + date + '">+ Log Workout</button>' +
+    '<button class="btn btn-sm" data-action="newEvent" data-date="' + date + '">+ Special Event</button>' +
+    '</div>';
+  return modalShell(fmtDateLong(date), body, '');
+}
+
+function renderBodyWeightRow(date, workoutBW, standaloneBW) {
+  if (workoutBW) {
+    return '<div class="bw-row"><span class="bw-label">Body weight</span><span class="bw-value">' + escapeHtml(workoutBW.bodyWeight) + ' lb</span>' +
+      '<span class="helptext">from that day&rsquo;s workout</span></div>';
+  }
+  if (standaloneBW) {
+    return '<div class="bw-row"><span class="bw-label">Body weight</span><span class="bw-value">' + escapeHtml(standaloneBW.weight) + ' lb</span>' +
+      '<span class="row-actions"><button class="link-btn" data-action="editBodyWeight" data-id="' + standaloneBW.id + '">Edit</button>' +
+      '<button class="link-btn" data-action="confirmDeleteBodyWeight" data-id="' + standaloneBW.id + '" style="color:var(--danger);">Delete</button></span></div>';
+  }
+  return '<div class="bw-row"><span class="bw-label">Body weight</span><button class="link-btn" data-action="newBodyWeight" data-date="' + date + '">+ Log body weight</button></div>';
+}
+
+function setLabel(set) {
+  if (set.isDrop) {
+    return '<span class="drop-chain">' + set.stages.map(function (s) { return escapeHtml(s.reps); }).join(' &rarr; ') + ' reps @ ' + set.stages.map(function (s) { return escapeHtml(s.weight); }).join('/') + '</span>';
+  }
+  return escapeHtml(set.reps) + ' reps @ ' + escapeHtml(set.weight);
+}
+
+function renderExerciseView(ex) {
+  if (!ex.sets || !ex.sets.length) {
+    return '<div class="exercise-view-name">' + escapeHtml(ex.name) + '</div><div class="helptext">No sets recorded</div>';
+  }
+  var rows = ex.sets.map(function (s, i) { return '<tr><td>' + (i + 1) + '</td><td>' + setLabel(s) + '</td></tr>'; }).join('');
+  return '<div class="exercise-view-name">' + escapeHtml(ex.name) + '</div><table class="sets-table">' + rows + '</table>';
+}
+
+function renderBlockView(block) {
+  var inner = block.exercises.map(renderExerciseView).join('<div style="height:8px;"></div>');
+  var tag = block.type === 'superset' ? '<div class="superset-tag">Superset</div>' : '';
+  return '<div class="exercise-block-view">' + tag + inner + '</div>';
+}
+
+function cardioLabel(c) {
+  if (c.machine === 'Treadmill') return [c.time, c.speed, c.incline ? c.incline + '° incline' : ''].filter(Boolean).map(escapeHtml).join(' &middot; ');
+  if (c.machine === 'Bike') return [c.time, c.speed].filter(Boolean).map(escapeHtml).join(' &middot; ');
+  if (c.machine === 'Row Machine') {
+    if (c.intervals && c.intervals.length) {
+      return c.intervals.map(function (iv) { return escapeHtml(iv.distance) + ' in ' + escapeHtml(iv.split); }).join(', ');
+    }
+    return [c.totalDistance, c.time, c.avgSplit ? 'avg split ' + c.avgSplit : ''].filter(Boolean).map(escapeHtml).join(' &middot; ');
+  }
+  return escapeHtml(c.description || c.notes || '');
+}
+
+function renderCardioView(c) {
+  return '<div class="cardio-card"><div class="cc-title">' + escapeHtml(c.machine) + '</div><div class="helptext">' + cardioLabel(c) + '</div></div>';
+}
+
+function renderWorkoutSummary(w) {
+  var meta = '<div class="meta-strip">';
+  if (w.bodyWeight) meta += '<span>BW <strong>' + escapeHtml(w.bodyWeight) + '</strong></span>';
+  if (w.startTime) meta += '<span>Start <strong>' + fmtTime12(w.startTime) + '</strong></span>';
+  if (w.endTime) meta += '<span>End <strong>' + fmtTime12(w.endTime) + '</strong></span>';
+  meta += '</div>';
+  var blocks = (w.blocks || []).map(renderBlockView).join('');
+  var cardio = (w.cardio || []).map(renderCardioView).join('');
+  return '<div style="margin-bottom:18px;">' +
+    '<div class="workout-summary-head"><span class="category-badge">' + escapeHtml(w.notes || w.category) + '</span>' +
+    '<span class="row-actions"><button class="link-btn" data-action="editWorkout" data-id="' + w.id + '">Edit</button>' +
+    '<button class="link-btn" data-action="confirmDeleteWorkout" data-id="' + w.id + '" style="color:var(--danger);">Delete</button></span></div>' +
+    meta + blocks + cardio + '</div>';
+}
+
+function renderEventSummary(ev) {
+  return '<div style="margin-bottom:14px;border-left:3px solid var(--info);padding-left:10px;">' +
+    '<div class="workout-summary-head"><strong>' + escapeHtml(ev.title) + '</strong>' +
+    '<span class="row-actions"><button class="link-btn" data-action="editEvent" data-id="' + ev.id + '">Edit</button>' +
+    '<button class="link-btn" data-action="confirmDeleteEvent" data-id="' + ev.id + '" style="color:var(--danger);">Delete</button></span></div>' +
+    (ev.notes ? '<div class="helptext">' + escapeHtml(ev.notes) + '</div>' : '') + '</div>';
+}
+
+/* ---------------- event form modal ---------------- */
+function renderEventFormModal(m) {
+  var ev = m.editingId ? STATE.events.find(function (e) { return e.id === m.editingId; }) : null;
+  var date = ev ? ev.date : m.date;
+  var title = ev ? ev.title : '';
+  var notes = ev ? ev.notes : '';
+  var body = '<div class="field"><label>Date</label><input type="date" id="ef-date" value="' + date + '"></div>' +
+    '<div class="field"><label>Title</label><input type="text" id="ef-title" placeholder="e.g. Stillwater 500 Ride" value="' + escapeHtml(title) + '"></div>' +
+    '<div class="field"><label>Notes (optional)</label><textarea id="ef-notes">' + escapeHtml(notes) + '</textarea></div>';
+  var footer = '<button class="btn" data-action="closeModal">Cancel</button>' +
+    '<button class="btn btn-accent" data-action="saveEvent" data-id="' + (ev ? ev.id : '') + '">Save Event</button>';
+  return modalShell(ev ? 'Edit Event' : 'Log Special Event', body, footer);
+}
+
+/* ---------------- body weight form modal ---------------- */
+function renderBodyWeightFormModal(m) {
+  var bw = m.editingId ? (STATE.bodyWeights || []).find(function (b) { return b.id === m.editingId; }) : null;
+  var date = bw ? bw.date : m.date;
+  var weight = bw ? bw.weight : '';
+  var body = '<div class="field"><label>Date</label><input type="date" id="bw-date" value="' + date + '"></div>' +
+    '<div class="field"><label>Body weight (lb)</label><input type="number" step="0.1" inputmode="decimal" id="bw-weight" placeholder="e.g. 264.5" value="' + escapeHtml(weight) + '"></div>';
+  var footer = '<button class="btn" data-action="closeModal">Cancel</button>' +
+    '<button class="btn btn-accent" data-action="saveBodyWeight" data-id="' + (bw ? bw.id : '') + '">Save</button>';
+  return modalShell(bw ? 'Edit Body Weight' : 'Log Body Weight', body, footer);
+}
+
+/* ---------------- backup / restore modal ---------------- */
+function renderBackupModal() {
+  var body = '<p class="helptext" style="margin-bottom:14px;">Workout Book saves data on this device only. Export a backup file periodically (e.g. onto your desktop) so you have a copy if this device is lost, and Import a backup on another device to bring its data in &mdash; imported entries are merged in, never overwritten.</p>' +
+    '<div class="row-actions" style="margin-bottom:10px;">' +
+    '<button class="btn btn-accent" data-action="exportBackup">&#8595; Export Backup</button>' +
+    '<button class="btn" data-action="triggerImport">&#8593; Import Backup</button>' +
+    '</div>';
+  return modalShell('Backup &amp; Restore', body, '<button class="btn" data-action="closeModal">Done</button>');
+}
+
+/* ---------------- add user modal ---------------- */
+function renderAddUserModal() {
+  var body = '<div class="field"><label>Name</label><input type="text" id="au-name" placeholder="e.g. Jordan" autofocus></div>';
+  var footer = '<button class="btn" data-action="closeModal">Cancel</button><button class="btn btn-accent" data-action="saveUser">Add Lifter</button>';
+  return modalShell('Add a Lifter', body, footer);
+}
+
+/* ---------------- exercise library modal ---------------- */
+function renderExerciseLibraryModal() {
+  var groups = MUSCLE_GROUPS.concat(Object.keys(STATE.exercises).filter(function (g) { return MUSCLE_GROUPS.indexOf(g) === -1 && g !== 'Cardio'; }));
+  var body = '<div class="field"><label>Add exercise</label><div class="field-row">' +
+    '<select id="lib-group">' + groups.map(function (g) { return '<option value="' + escapeHtml(g) + '">' + escapeHtml(g) + '</option>'; }).join('') + '</select>' +
+    '<input type="text" id="lib-name" placeholder="Exercise name">' +
+    '</div><button class="btn btn-accent btn-sm" style="margin-top:8px;" data-action="addLibraryExercise">Add</button></div><hr class="divider">';
+  groups.forEach(function (g) {
+    var list = STATE.exercises[g] || [];
+    if (!list.length) return;
+    body += '<div class="exercise-manage-group"><h4>' + escapeHtml(g) + '</h4><div class="exercise-chip-list">' +
+      list.map(function (n) { return '<button class="exercise-chip" data-action="confirmRemoveExercise" data-group="' + escapeHtml(g) + '" data-name="' + escapeHtml(n) + '" title="Remove">' + escapeHtml(n) + ' &times;</button>'; }).join('') +
+      '</div></div>';
+  });
+  return modalShell('Exercise Library', body, '<button class="btn" data-action="closeModal">Done</button>');
+}
+
+/* ---------------- workout builder ---------------- */
+function newDraft(date) {
+  return {
+    editingId: null, date: date || todayStr(), startTime: nowTimeStr(), endTime: null,
+    category: 'Upper', bodyWeight: '', notes: '', blocks: [], cardio: [], step: 'setup'
+  };
+}
+function draftFromWorkout(w) {
+  var d = deepClone(w);
+  d.editingId = w.id; d.step = 'build';
+  d.bodyWeight = (w.bodyWeight === null || w.bodyWeight === undefined) ? '' : String(w.bodyWeight);
+  if (!d.cardio) d.cardio = [];
+  if (!d.blocks) d.blocks = [];
+  if (!d.notes) d.notes = '';
+  return d;
+}
+
+function renderWorkoutBuilderModal() {
+  var title = DRAFT.editingId ? 'Edit Workout' : 'New Workout';
+  var body, footer;
+  if (DRAFT.step === 'setup') { body = renderStepSetup(); footer = '<button class="btn" data-action="closeModal">Cancel</button><button class="btn btn-accent" data-action="continueSetup">Continue</button>'; }
+  else if (DRAFT.step === 'source') { body = renderStepSource(); footer = '<button class="btn" data-action="backToSetup">Back</button>'; }
+  else if (DRAFT.step === 'template') { body = renderStepTemplate(); footer = '<button class="btn" data-action="backToSource">Back</button>'; }
+  else { body = renderStepBuild(); footer = '<button class="btn" data-action="' + (DRAFT.editingId ? 'closeModal' : 'backToSetup') + '">' + (DRAFT.editingId ? 'Cancel' : 'Back') + '</button><button class="btn btn-accent" data-action="completeWorkout">' + (DRAFT.editingId ? 'Save Changes' : 'Complete Workout') + '</button>'; }
+  return modalShell(title, body, footer);
+}
+
+function renderStepSetup() {
+  var cats = CATEGORIES.map(function (c) {
+    return '<button class="choice-card' + (DRAFT.category === c ? ' selected' : '') + '" data-action="setDraftCategory" data-cat="' + c + '">' + c + '</button>';
+  }).join('');
+  return '<div class="field-row">' +
+    '<div class="field"><label>Date</label><input type="date" id="d-date" value="' + DRAFT.date + '"></div>' +
+    '<div class="field"><label>Start time</label><input type="time" id="d-start" value="' + (DRAFT.startTime || '') + '"></div>' +
+    '</div>' +
+    '<div class="field"><label>Body weight (optional)</label><input type="text" inputmode="decimal" id="d-bw" placeholder="e.g. 251" value="' + escapeHtml(DRAFT.bodyWeight) + '"></div>' +
+    '<div class="field"><label>Category</label><div class="choice-grid">' + cats + '</div></div>';
+}
+
+function renderStepSource() {
+  return '<div class="choice-grid">' +
+    '<button class="choice-card" data-action="chooseScratch">Start From Scratch</button>' +
+    '<button class="choice-card" data-action="chooseTemplate">Use Previous Workout</button>' +
+    '</div><p class="helptext">Category: ' + escapeHtml(DRAFT.category) + ' &middot; ' + fmtDateLong(DRAFT.date) + '</p>';
+}
+
+function renderStepTemplate() {
+  var templates = recentTemplates(currentUser().id, DRAFT.category, null);
+  if (!templates.length) {
+    return '<div class="empty-state">No previous ' + escapeHtml(DRAFT.category) + ' workouts yet.<br><button class="btn btn-sm" style="margin-top:10px;" data-action="chooseScratch">Start From Scratch Instead</button></div>';
+  }
+  var cards = templates.map(function (t) {
+    var names = (t.blocks || []).map(function (b) { return b.exercises.map(function (e) { return e.name; }).join(' / '); }).join(', ');
+    return '<button class="template-card" data-action="pickTemplate" data-id="' + t.id + '" style="width:100%;text-align:left;">' +
+      '<span class="tc-date">' + fmtDateLong(t.date) + '</span><span class="tc-list">' + escapeHtml(names || 'No exercises recorded') + '</span></button>';
+  }).join('');
+  return '<div style="display:flex;flex-direction:column;gap:10px;">' + cards + '</div>';
+}
+
+function renderStepBuild() {
+  var out = '<div class="field-row">' +
+    '<div class="field"><label>Body weight (optional)</label><input type="text" inputmode="decimal" id="d-bw" placeholder="e.g. 251" value="' + escapeHtml(DRAFT.bodyWeight) + '"></div>' +
+    '<div class="field"><label>Category</label><select id="d-cat">' + CATEGORIES.map(function (c) { return '<option value="' + c + '"' + (DRAFT.category === c ? ' selected' : '') + '>' + c + '</option>'; }).join('') + '</select></div>' +
+    '</div>';
+  out += '<div><div class="section-label" style="margin-bottom:8px;">Exercises</div>';
+  out += DRAFT.blocks.map(renderBlockEditor).join('');
+  out += '<div class="row-actions" style="margin-top:6px;">' +
+    '<button class="link-btn" data-action="addBlock" data-blocktype="standard">+ Add Exercise</button>' +
+    '<button class="link-btn" data-action="addBlock" data-blocktype="superset">+ Add Superset</button>' +
+    '</div></div>';
+  out += '<hr class="divider">';
+  out += '<div><div class="section-label" style="margin-bottom:8px;">Cardio</div>';
+  out += DRAFT.cardio.map(renderCardioEditor).join('');
+  out += '<button class="link-btn" data-action="addCardio">+ Add Cardio Entry</button></div>';
+  return out + renderExerciseDatalist();
+}
+
+function renderExerciseDatalist() {
+  return '<datalist id="exercise-options">' + allExerciseNames().map(function (n) { return '<option value="' + escapeHtml(n) + '">'; }).join('') + '</datalist>';
+}
+
+function renderBlockEditor(block, bi) {
+  var badge = block.type === 'superset' ? '<span class="block-type-badge">Superset</span>' : '<span class="block-type-badge standard">Standard</span>';
+  var head = '<div class="block-card-head">' + badge +
+    '<span class="row-actions">' +
+    (block.type === 'superset' && block.exercises.length < 3 ? '<button class="link-btn" data-action="addExerciseSlot" data-block="' + bi + '">+ exercise</button>' : '') +
+    '<button class="link-btn" data-action="removeBlock" data-block="' + bi + '" style="color:var(--danger);">remove</button>' +
+    '</span></div>';
+  var slots = block.exercises.map(function (ex, si) { return renderExerciseSlot(ex, bi, si, block.exercises.length > 1); }).join('');
+  return '<div class="block-card" style="margin-bottom:12px;">' + head + slots + '</div>';
+}
+
+function renderExerciseSlot(ex, bi, si, removable) {
+  var group = ex.muscleGroup || exerciseGroupOf(ex.name) || 'Chest';
+  var groupOptions = MUSCLE_GROUPS.concat(Object.keys(STATE.exercises).filter(function (g) { return MUSCLE_GROUPS.indexOf(g) === -1 && g !== 'Cardio'; }))
+    .map(function (g) { return '<option value="' + escapeHtml(g) + '"' + (g === group ? ' selected' : '') + '>' + escapeHtml(g) + '</option>'; }).join('');
+  var head = '<div class="exercise-slot-head">' +
+    '<input type="text" class="exercise-name-input" list="exercise-options" placeholder="Exercise name" value="' + escapeHtml(ex.name) + '" data-kind="exerciseName" data-block="' + bi + '" data-slot="' + si + '">' +
+    '<select data-kind="exerciseGroup" data-block="' + bi + '" data-slot="' + si + '" style="width:120px;">' + groupOptions + '</select>' +
+    (removable ? '<button class="icon-btn" data-action="removeExerciseSlot" data-block="' + bi + '" data-slot="' + si + '">&#10005;</button>' : '') +
+    '</div>';
+  var sets = ex.sets.map(function (s, wi) { return renderSetEditor(s, bi, si, wi); }).join('');
+  var footer = '<div class="row-actions"><button class="link-btn" data-action="addSet" data-block="' + bi + '" data-slot="' + si + '">+ Add Set</button></div>';
+  return '<div class="exercise-slot">' + head + sets + footer + '</div>';
+}
+
+function renderSetEditor(set, bi, si, wi) {
+  var idx = '<span class="set-idx">' + (wi + 1) + '</span>';
+  if (!set.isDrop) {
+    var staleCls = set.stale ? ' stale' : '';
+    return '<div class="set-row">' + idx +
+      '<input type="text" inputmode="decimal" class="' + staleCls.trim() + '" placeholder="reps" value="' + escapeHtml(set.reps) + '" data-kind="setField" data-field="reps" data-block="' + bi + '" data-slot="' + si + '" data-set="' + wi + '">' +
+      '<input type="text" inputmode="decimal" class="' + staleCls.trim() + '" placeholder="weight" value="' + escapeHtml(set.weight) + '" data-kind="setField" data-field="weight" data-block="' + bi + '" data-slot="' + si + '" data-set="' + wi + '">' +
+      '<button class="link-btn" data-action="convertToDrop" data-block="' + bi + '" data-slot="' + si + '" data-set="' + wi + '" title="Make drop set">&#9660;</button>' +
+      '<button class="icon-btn set-row-remove" data-action="removeSet" data-block="' + bi + '" data-slot="' + si + '" data-set="' + wi + '">&#10005;</button>' +
+      '</div>';
+  }
+  var stages = set.stages.map(function (st, sti) {
+    var staleCls = st.stale ? ' stale' : '';
+    return '<div class="stage-row">' +
+      '<input type="text" inputmode="decimal" class="' + staleCls.trim() + '" placeholder="reps" value="' + escapeHtml(st.reps) + '" data-kind="stageField" data-field="reps" data-block="' + bi + '" data-slot="' + si + '" data-set="' + wi + '" data-stage="' + sti + '">' +
+      '<input type="text" inputmode="decimal" class="' + staleCls.trim() + '" placeholder="weight" value="' + escapeHtml(st.weight) + '" data-kind="stageField" data-field="weight" data-block="' + bi + '" data-slot="' + si + '" data-set="' + wi + '" data-stage="' + sti + '">' +
+      (set.stages.length > 2 ? '<button class="icon-btn" data-action="removeStage" data-block="' + bi + '" data-slot="' + si + '" data-set="' + wi + '" data-stage="' + sti + '">&#10005;</button>' : '<span style="width:34px;"></span>') +
+      '</div>';
+  }).join('');
+  return '<div class="set-block">' +
+    '<div class="set-block-head"><span class="tiny-label">Set ' + (wi + 1) + ' &middot; Drop Set</span>' +
+    '<span class="row-actions"><button class="link-btn" data-action="addStage" data-block="' + bi + '" data-slot="' + si + '" data-set="' + wi + '">+ stage</button>' +
+    '<button class="link-btn" data-action="convertToStandard" data-block="' + bi + '" data-slot="' + si + '" data-set="' + wi + '">undo</button>' +
+    '<button class="icon-btn" data-action="removeSet" data-block="' + bi + '" data-slot="' + si + '" data-set="' + wi + '">&#10005;</button></span></div>' +
+    stages + '</div>';
+}
+
+function cardioFieldsHtml(c, ci) {
+  function fld(field, label, ph) {
+    return '<div class="field"><label>' + label + '</label><input type="text" placeholder="' + (ph || '') + '" value="' + escapeHtml(c[field] || '') + '" data-kind="cardioField" data-field="' + field + '" data-cardio="' + ci + '"></div>';
+  }
+  if (c.machine === 'Treadmill') return '<div class="field-row">' + fld('time', 'Time', 'e.g. 25 min') + fld('speed', 'Speed', 'e.g. 3 mph') + fld('incline', 'Incline', 'e.g. 12') + '</div>';
+  if (c.machine === 'Bike') return '<div class="field-row">' + fld('time', 'Time', 'e.g. 20 min') + fld('speed', 'Speed', 'e.g. 15 mph') + '</div>';
+  if (c.machine === 'Row Machine') return '<div class="field-row">' + fld('totalDistance', 'Total distance', 'e.g. 2000m') + fld('time', 'Time', 'e.g. 8:30') + fld('avgSplit', 'Avg /500m split', 'e.g. 1:52') + '</div>';
+  return '<div class="field"><label>Details</label><textarea data-kind="cardioField" data-field="description" data-cardio="' + ci + '">' + escapeHtml(c.description || '') + '</textarea></div>';
+}
+
+function renderCardioEditor(c, ci) {
+  var machineOpts = CARDIO_MACHINES.map(function (m) { return '<option value="' + m + '"' + (c.machine === m ? ' selected' : '') + '>' + m + '</option>'; }).join('');
+  return '<div class="block-card" style="margin-bottom:12px;"><div class="block-card-head">' +
+    '<select data-kind="cardioMachine" data-cardio="' + ci + '">' + machineOpts + '</select>' +
+    '<button class="icon-btn" data-action="removeCardio" data-cardio="' + ci + '">&#10005;</button></div>' +
+    '<div class="exercise-slot">' + cardioFieldsHtml(c, ci) + '</div></div>';
+}
+
+/* ====================================================================
+   ACTIONS
+   ==================================================================== */
+function cloneBlocksAsTemplate(blocks) {
+  var copy = deepClone(blocks || []);
+  copy.forEach(function (b) {
+    b.exercises.forEach(function (ex) {
+      ex.sets.forEach(function (s) {
+        if (s.isDrop) { s.stages.forEach(function (st) { st.stale = true; }); }
+        else { s.stale = true; }
+      });
+    });
+  });
+  return copy;
+}
+function val(id) { var el = document.getElementById(id); return el ? el.value : ''; }
+
+function actSelectUser(id) { UI.currentUserId = id; UI.modal = null; render(); }
+function actPromptAddUser() { UI.modal = { type: 'addUser' }; render(); }
+function actSaveUser() {
+  var name = val('au-name').trim();
+  if (!name) { showToast('Enter a name.'); return; }
+  var newState = deepClone(STATE);
+  var u = { id: uid('u'), name: name };
+  newState.users.push(u);
+  UI.currentUserId = u.id;
+  UI.modal = null;
+  persist(newState);
+}
+function actSwitchUser() { UI.currentUserId = null; UI.selectedDate = null; UI.modal = null; render(); }
+
+function actOpenExerciseLibrary() { UI.modal = { type: 'exerciseLibrary' }; render(); }
+function actAddLibraryExercise() {
+  var group = val('lib-group'), name = val('lib-name').trim();
+  if (!name) { showToast('Enter an exercise name.'); return; }
+  var newState = deepClone(STATE);
+  if (!newState.exercises[group]) newState.exercises[group] = [];
+  if (newState.exercises[group].indexOf(name) === -1) newState.exercises[group].push(name);
+  UI.modal = { type: 'exerciseLibrary' };
+  persist(newState);
+}
+function actConfirmRemoveExercise(group, name) {
+  UI.modal = { type: 'confirm', kind: 'removeExercise', group: group, name: name, message: 'Remove "' + name + '" from ' + group + '?', confirmLabel: 'Remove' };
+  render();
+}
+
+function actPrevMonth() { var r = addMonths(UI.year, UI.month, -1); UI.year = r.y; UI.month = r.m; render(); }
+function actNextMonth() { var r = addMonths(UI.year, UI.month, 1); UI.year = r.y; UI.month = r.m; render(); }
+function actGoToday() { var p = parseYMD(todayStr()); UI.year = p.y; UI.month = p.m; render(); }
+function actOpenDay(date) { UI.selectedDate = date; UI.modal = { type: 'dayDetail', date: date }; render(); }
+function actCloseModal() {
+  if (UI.modal && UI.modal.type === 'dayDetail') UI.selectedDate = null;
+  UI.modal = null; DRAFT = null; render();
+}
+function actOverlayClick() { actCloseModal(); }
+
+function actNewWorkout(date) { DRAFT = newDraft(date); UI.modal = { type: 'workoutBuilder' }; render(); }
+function actEditWorkout(id) {
+  var w = STATE.workouts.find(function (x) { return x.id === id; });
+  if (!w) return;
+  DRAFT = draftFromWorkout(w);
+  UI.modal = { type: 'workoutBuilder' };
+  render();
+}
+function actConfirmDeleteWorkout(id) {
+  var w = STATE.workouts.find(function (x) { return x.id === id; });
+  UI.modal = { type: 'confirm', kind: 'deleteWorkout', id: id, returnDate: w ? w.date : null, message: 'Delete this workout? This cannot be undone.', confirmLabel: 'Delete Workout' };
+  render();
+}
+function actNewEvent(date) { UI.modal = { type: 'eventForm', date: date, editingId: null }; render(); }
+function actEditEvent(id) { UI.modal = { type: 'eventForm', editingId: id }; render(); }
+function actConfirmDeleteEvent(id) {
+  var ev = STATE.events.find(function (x) { return x.id === id; });
+  UI.modal = { type: 'confirm', kind: 'deleteEvent', id: id, returnDate: ev ? ev.date : null, message: 'Delete this event? This cannot be undone.', confirmLabel: 'Delete Event' };
+  render();
+}
+function actSaveEvent(editingId) {
+  var date = val('ef-date'), title = val('ef-title').trim(), notes = val('ef-notes').trim();
+  if (!date || !title) { showToast('Add a date and title.'); return; }
+  var newState = deepClone(STATE);
+  if (editingId) {
+    var idx = newState.events.findIndex(function (e) { return e.id === editingId; });
+    if (idx !== -1) newState.events[idx] = Object.assign({}, newState.events[idx], { date: date, title: title, notes: notes });
+  } else {
+    newState.events.push({ id: uid('e'), userId: currentUser().id, date: date, title: title, notes: notes });
+  }
+  UI.selectedDate = date;
+  UI.modal = { type: 'dayDetail', date: date };
+  persist(newState);
+}
+
+/* ---------------- body weight actions ---------------- */
+function actNewBodyWeight(date) { UI.modal = { type: 'bodyWeightForm', date: date, editingId: null }; render(); }
+function actEditBodyWeight(id) { UI.modal = { type: 'bodyWeightForm', editingId: id }; render(); }
+function actConfirmDeleteBodyWeight(id) {
+  var bw = (STATE.bodyWeights || []).find(function (x) { return x.id === id; });
+  UI.modal = { type: 'confirm', kind: 'deleteBodyWeight', id: id, returnDate: bw ? bw.date : null, message: 'Delete this body weight entry? This cannot be undone.', confirmLabel: 'Delete Entry' };
+  render();
+}
+function actSaveBodyWeight(editingId) {
+  var date = val('bw-date'), weight = val('bw-weight').trim();
+  if (!date || !weight || isNaN(Number(weight))) { showToast('Add a date and a valid weight.'); return; }
+  var newState = deepClone(STATE);
+  if (!newState.bodyWeights) newState.bodyWeights = [];
+  if (editingId) {
+    var idx = newState.bodyWeights.findIndex(function (b) { return b.id === editingId; });
+    if (idx !== -1) newState.bodyWeights[idx] = Object.assign({}, newState.bodyWeights[idx], { date: date, weight: Number(weight) });
+  } else {
+    var existingIdx = newState.bodyWeights.findIndex(function (b) { return b.userId === currentUser().id && b.date === date; });
+    if (existingIdx !== -1) {
+      newState.bodyWeights[existingIdx] = Object.assign({}, newState.bodyWeights[existingIdx], { weight: Number(weight) });
+    } else {
+      newState.bodyWeights.push({ id: uid('bw'), userId: currentUser().id, date: date, weight: Number(weight) });
+    }
+  }
+  UI.selectedDate = date;
+  UI.modal = { type: 'dayDetail', date: date };
+  persist(newState);
+}
+
+/* ---------------- backup actions ---------------- */
+function actOpenBackup() { UI.modal = { type: 'backup' }; render(); }
+
+function actConfirmProceed() {
+  var m = UI.modal;
+  if (!m) return;
+  if (m.kind === 'deleteWorkout') {
+    var ns = deepClone(STATE);
+    ns.workouts = ns.workouts.filter(function (w) { return w.id !== m.id; });
+    UI.modal = m.returnDate ? { type: 'dayDetail', date: m.returnDate } : null;
+    persist(ns);
+  } else if (m.kind === 'deleteEvent') {
+    var ns2 = deepClone(STATE);
+    ns2.events = ns2.events.filter(function (e) { return e.id !== m.id; });
+    UI.modal = m.returnDate ? { type: 'dayDetail', date: m.returnDate } : null;
+    persist(ns2);
+  } else if (m.kind === 'removeExercise') {
+    var ns3 = deepClone(STATE);
+    ns3.exercises[m.group] = (ns3.exercises[m.group] || []).filter(function (n) { return n !== m.name; });
+    UI.modal = { type: 'exerciseLibrary' };
+    persist(ns3);
+  } else if (m.kind === 'deleteBodyWeight') {
+    var ns4 = deepClone(STATE);
+    ns4.bodyWeights = (ns4.bodyWeights || []).filter(function (b) { return b.id !== m.id; });
+    UI.modal = m.returnDate ? { type: 'dayDetail', date: m.returnDate } : null;
+    persist(ns4);
+  }
+}
+
+/* ---- workout builder step actions ---- */
+function actSetDraftCategory(cat) { DRAFT.category = cat; render(); }
+function actContinueSetup() {
+  DRAFT.date = val('d-date') || todayStr();
+  DRAFT.startTime = val('d-start');
+  DRAFT.bodyWeight = val('d-bw');
+  if (DRAFT.category === 'Cardio') { DRAFT.blocks = []; DRAFT.step = 'build'; }
+  else { DRAFT.step = 'source'; }
+  render();
+}
+function actBackToSetup() { DRAFT.step = 'setup'; render(); }
+function actBackToSource() { DRAFT.step = 'source'; render(); }
+function actChooseScratch() { DRAFT.blocks = []; DRAFT.step = 'build'; render(); }
+function actChooseTemplate() { DRAFT.step = 'template'; render(); }
+function actPickTemplate(id) {
+  var w = STATE.workouts.find(function (x) { return x.id === id; });
+  DRAFT.blocks = cloneBlocksAsTemplate(w ? w.blocks : []);
+  DRAFT.step = 'build';
+  render();
+}
+
+var EMPTY_SET = function () { return { reps: '', weight: '' }; };
+var EMPTY_SLOT = function () { return { name: '', muscleGroup: 'Chest', sets: [EMPTY_SET()] }; };
+
+function actAddBlock(type) {
+  var exercises = [EMPTY_SLOT()];
+  if (type === 'superset') exercises.push(EMPTY_SLOT());
+  DRAFT.blocks.push({ type: type, exercises: exercises });
+  render();
+}
+function actRemoveBlock(bi) { DRAFT.blocks.splice(bi, 1); render(); }
+function actAddExerciseSlot(bi) { if (DRAFT.blocks[bi].exercises.length < 3) DRAFT.blocks[bi].exercises.push(EMPTY_SLOT()); render(); }
+function actRemoveExerciseSlot(bi, si) {
+  var blk = DRAFT.blocks[bi];
+  blk.exercises.splice(si, 1);
+  if (blk.exercises.length <= 1) blk.type = 'standard';
+  if (blk.exercises.length === 0) DRAFT.blocks.splice(bi, 1);
+  render();
+}
+function actAddSet(bi, si) { DRAFT.blocks[bi].exercises[si].sets.push(EMPTY_SET()); render(); }
+function actRemoveSet(bi, si, wi) { DRAFT.blocks[bi].exercises[si].sets.splice(wi, 1); render(); }
+function actConvertToDrop(bi, si, wi) {
+  var set = DRAFT.blocks[bi].exercises[si].sets[wi];
+  DRAFT.blocks[bi].exercises[si].sets[wi] = { isDrop: true, stages: [{ reps: set.reps, weight: set.weight }, EMPTY_SET()] };
+  render();
+}
+function actConvertToStandard(bi, si, wi) {
+  var set = DRAFT.blocks[bi].exercises[si].sets[wi];
+  var first = set.stages[0];
+  DRAFT.blocks[bi].exercises[si].sets[wi] = { reps: first.reps, weight: first.weight };
+  render();
+}
+function actAddStage(bi, si, wi) { DRAFT.blocks[bi].exercises[si].sets[wi].stages.push(EMPTY_SET()); render(); }
+function actRemoveStage(bi, si, wi, sti) {
+  var stages = DRAFT.blocks[bi].exercises[si].sets[wi].stages;
+  if (stages.length > 2) stages.splice(sti, 1);
+  render();
+}
+function actAddCardio() { DRAFT.cardio.push({ machine: 'Treadmill', time: '', speed: '', incline: '' }); render(); }
+function actRemoveCardio(ci) { DRAFT.cardio.splice(ci, 1); render(); }
+
+function actCompleteWorkout() {
+  var bwEl = document.getElementById('d-bw'); if (bwEl) DRAFT.bodyWeight = bwEl.value;
+  var catEl = document.getElementById('d-cat'); if (catEl) DRAFT.category = catEl.value;
+
+  var cleanedBlocks = [];
+  DRAFT.blocks.forEach(function (b) {
+    var exs = b.exercises.filter(function (ex) { return ex.name && ex.name.trim() !== ''; }).map(function (ex) {
+      var sets = ex.sets.filter(function (s) {
+        if (s.isDrop) return s.stages.some(function (st) { return st.reps || st.weight; });
+        return s.reps || s.weight;
+      }).map(function (s) {
+        if (s.isDrop) return { isDrop: true, stages: s.stages.map(function (st) { return { reps: st.reps || '', weight: st.weight || '' }; }) };
+        return { reps: s.reps || '', weight: s.weight || '' };
+      });
+      return { name: ex.name.trim(), muscleGroup: ex.muscleGroup || exerciseGroupOf(ex.name.trim()) || 'Other', sets: sets };
+    });
+    if (exs.length) cleanedBlocks.push({ type: exs.length > 1 ? 'superset' : 'standard', exercises: exs });
+  });
+  var cleanedCardio = DRAFT.cardio.filter(function (c) {
+    return Object.keys(c).some(function (k) { return k !== 'machine' && c[k]; });
+  });
+  if (!cleanedBlocks.length && !cleanedCardio.length) { showToast('Add at least one exercise or cardio entry before saving.'); return; }
+
+  var newState = deepClone(STATE);
+  cleanedBlocks.forEach(function (b) {
+    b.exercises.forEach(function (ex) {
+      var g = ex.muscleGroup;
+      if (!newState.exercises[g]) newState.exercises[g] = [];
+      if (newState.exercises[g].indexOf(ex.name) === -1) newState.exercises[g].push(ex.name);
+    });
+  });
+
+  var user = currentUser();
+  if (DRAFT.editingId) {
+    var idx = newState.workouts.findIndex(function (w) { return w.id === DRAFT.editingId; });
+    var existing = newState.workouts[idx];
+    newState.workouts[idx] = Object.assign({}, existing, {
+      date: DRAFT.date, category: DRAFT.category, bodyWeight: DRAFT.bodyWeight === '' ? null : Number(DRAFT.bodyWeight),
+      blocks: cleanedBlocks, cardio: cleanedCardio
+    });
+  } else {
+    newState.workouts.push({
+      id: uid('w'), userId: user.id, date: DRAFT.date, category: DRAFT.category,
+      bodyWeight: DRAFT.bodyWeight === '' ? null : Number(DRAFT.bodyWeight),
+      startTime: DRAFT.startTime || null, endTime: nowTimeStr(), notes: '', blocks: cleanedBlocks, cardio: cleanedCardio
+    });
+  }
+  UI.selectedDate = DRAFT.date;
+  UI.modal = { type: 'dayDetail', date: DRAFT.date };
+  DRAFT = null;
+  persist(newState);
+}
+
+/* ====================================================================
+   EVENT DELEGATION
+   ==================================================================== */
+function onGlobalClick(e) {
+  var actionEl = e.target.closest('[data-action]');
+  if (!actionEl) return;
+  var action = actionEl.dataset.action;
+  if (action === 'overlayClick' && e.target !== actionEl) return;
+  e.preventDefault();
+  var d = actionEl.dataset;
+  switch (action) {
+    case 'selectUser': actSelectUser(d.user); break;
+    case 'promptAddUser': actPromptAddUser(); break;
+    case 'saveUser': actSaveUser(); break;
+    case 'switchUser': actSwitchUser(); break;
+    case 'openExerciseLibrary': actOpenExerciseLibrary(); break;
+    case 'addLibraryExercise': actAddLibraryExercise(); break;
+    case 'confirmRemoveExercise': actConfirmRemoveExercise(d.group, d.name); break;
+    case 'prevMonth': actPrevMonth(); break;
+    case 'nextMonth': actNextMonth(); break;
+    case 'goToday': actGoToday(); break;
+    case 'openDay': actOpenDay(d.date); break;
+    case 'closeModal': actCloseModal(); break;
+    case 'overlayClick': actOverlayClick(); break;
+    case 'newWorkout': actNewWorkout(d.date); break;
+    case 'editWorkout': actEditWorkout(d.id); break;
+    case 'confirmDeleteWorkout': actConfirmDeleteWorkout(d.id); break;
+    case 'newEvent': actNewEvent(d.date); break;
+    case 'editEvent': actEditEvent(d.id); break;
+    case 'confirmDeleteEvent': actConfirmDeleteEvent(d.id); break;
+    case 'saveEvent': actSaveEvent(d.id || null); break;
+    case 'confirmProceed': actConfirmProceed(); break;
+    case 'setDraftCategory': actSetDraftCategory(d.cat); break;
+    case 'continueSetup': actContinueSetup(); break;
+    case 'backToSetup': actBackToSetup(); break;
+    case 'backToSource': actBackToSource(); break;
+    case 'chooseScratch': actChooseScratch(); break;
+    case 'chooseTemplate': actChooseTemplate(); break;
+    case 'pickTemplate': actPickTemplate(d.id); break;
+    case 'addBlock': actAddBlock(d.blocktype); break;
+    case 'removeBlock': actRemoveBlock(Number(d.block)); break;
+    case 'addExerciseSlot': actAddExerciseSlot(Number(d.block)); break;
+    case 'removeExerciseSlot': actRemoveExerciseSlot(Number(d.block), Number(d.slot)); break;
+    case 'addSet': actAddSet(Number(d.block), Number(d.slot)); break;
+    case 'removeSet': actRemoveSet(Number(d.block), Number(d.slot), Number(d.set)); break;
+    case 'convertToDrop': actConvertToDrop(Number(d.block), Number(d.slot), Number(d.set)); break;
+    case 'convertToStandard': actConvertToStandard(Number(d.block), Number(d.slot), Number(d.set)); break;
+    case 'addStage': actAddStage(Number(d.block), Number(d.slot), Number(d.set)); break;
+    case 'removeStage': actRemoveStage(Number(d.block), Number(d.slot), Number(d.set), Number(d.stage)); break;
+    case 'addCardio': actAddCardio(); break;
+    case 'removeCardio': actRemoveCardio(Number(d.cardio)); break;
+    case 'completeWorkout': actCompleteWorkout(); break;
+    case 'newBodyWeight': actNewBodyWeight(d.date); break;
+    case 'editBodyWeight': actEditBodyWeight(d.id); break;
+    case 'confirmDeleteBodyWeight': actConfirmDeleteBodyWeight(d.id); break;
+    case 'saveBodyWeight': actSaveBodyWeight(d.id || null); break;
+    case 'openBackup': actOpenBackup(); break;
+    case 'exportBackup': exportBackup(); break;
+    case 'triggerImport': triggerImportPicker(); break;
+  }
+}
+
+function onGlobalInput(e) {
+  var t = e.target;
+  var kind = t.dataset.kind;
+  if (!DRAFT) return;
+  if (!kind) {
+    if (t.id === 'd-date') { DRAFT.date = t.value; }
+    else if (t.id === 'd-start') { DRAFT.startTime = t.value; }
+    else if (t.id === 'd-bw') { DRAFT.bodyWeight = t.value; }
+    return;
+  }
+  if (kind === 'exerciseName') {
+    var b = Number(t.dataset.block), s = Number(t.dataset.slot);
+    DRAFT.blocks[b].exercises[s].name = t.value;
+    var grp = exerciseGroupOf(t.value.trim());
+    if (grp) {
+      DRAFT.blocks[b].exercises[s].muscleGroup = grp;
+      var sel = document.querySelector('select[data-kind="exerciseGroup"][data-block="' + b + '"][data-slot="' + s + '"]');
+      if (sel) sel.value = grp;
+    }
+  } else if (kind === 'setField') {
+    var b1 = Number(t.dataset.block), s1 = Number(t.dataset.slot), w1 = Number(t.dataset.set), f1 = t.dataset.field;
+    var setObj = DRAFT.blocks[b1].exercises[s1].sets[w1];
+    setObj[f1] = t.value; setObj.stale = false;
+    t.classList.remove('stale');
+  } else if (kind === 'stageField') {
+    var b2 = Number(t.dataset.block), s2 = Number(t.dataset.slot), w2 = Number(t.dataset.set), st2 = Number(t.dataset.stage), f2 = t.dataset.field;
+    var stObj = DRAFT.blocks[b2].exercises[s2].sets[w2].stages[st2];
+    stObj[f2] = t.value; stObj.stale = false;
+    t.classList.remove('stale');
+  } else if (kind === 'cardioField') {
+    var ci = Number(t.dataset.cardio), f3 = t.dataset.field;
+    DRAFT.cardio[ci][f3] = t.value;
+  }
+}
+
+function onGlobalChange(e) {
+  var t = e.target;
+  var kind = t.dataset.kind;
+  if (kind === 'exerciseGroup' && DRAFT) {
+    var b = Number(t.dataset.block), s = Number(t.dataset.slot);
+    DRAFT.blocks[b].exercises[s].muscleGroup = t.value;
+  } else if (kind === 'cardioMachine' && DRAFT) {
+    var ci = Number(t.dataset.cardio);
+    var machine = t.value;
+    var fresh = { machine: machine };
+    if (machine === 'Treadmill') { fresh.time = ''; fresh.speed = ''; fresh.incline = ''; }
+    else if (machine === 'Bike') { fresh.time = ''; fresh.speed = ''; }
+    else if (machine === 'Row Machine') { fresh.totalDistance = ''; fresh.time = ''; fresh.avgSplit = ''; }
+    else { fresh.description = ''; }
+    DRAFT.cardio[ci] = fresh;
+    render();
+  } else if (t.id === 'd-cat' && DRAFT) {
+    DRAFT.category = t.value;
+  }
+}
+
+/* ====================================================================
+   INIT
+   ==================================================================== */
+function ensureImportInput() {
+  var input = document.getElementById('wb-import-input');
+  if (input) return input;
+  input = document.createElement('input');
+  input.type = 'file';
+  input.id = 'wb-import-input';
+  input.accept = 'application/json,.json';
+  input.style.display = 'none';
+  input.addEventListener('change', function (e) {
+    var file = e.target.files && e.target.files[0];
+    handleImportFile(file);
+    input.value = '';
+  });
+  document.body.appendChild(input);
+  return input;
+}
+
+function boot() {
+  document.addEventListener('click', onGlobalClick);
+  document.addEventListener('input', onGlobalInput);
+  document.addEventListener('change', onGlobalChange);
+  document.addEventListener('submit', function (e) { e.preventDefault(); });
+  ensureImportInput();
+  initPersistence();
+}
+if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+
+</script>
+</body>
+</html>
