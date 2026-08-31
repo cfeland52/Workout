@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { readState, updateState } from '../lib/store.js';
-import { uid } from '../lib/ids.js';
 
 const router = Router();
 
@@ -9,17 +8,22 @@ router.get('/', async (req, res) => {
   res.json(state.users);
 });
 
-router.post('/', async (req, res) => {
+// Upsert, same rationale as collectionRouter.js: the client generates the id
+// upfront so offline-created users can be safely retried.
+router.put('/:id', async (req, res) => {
+  const { id } = req.params;
   const { name } = req.body;
   if (!name || !String(name).trim()) {
     return res.status(400).json({ error: 'name is required' });
   }
-  const user = { id: uid('user'), name: String(name).trim() };
+  const user = { id, name: String(name).trim() };
   await updateState((state) => {
-    state.users.push(user);
+    const idx = state.users.findIndex((u) => u.id === id);
+    if (idx === -1) state.users.push(user);
+    else state.users[idx] = user;
     return state;
   });
-  res.status(201).json(user);
+  res.json(user);
 });
 
 export default router;

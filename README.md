@@ -3,7 +3,8 @@
 A private workout log: calendar, workout builder (supersets, drop sets, cardio),
 body weight tracking, and an exercise library. Runs as a Node.js server on your
 desktop with a React front end, so your desktop and phone share the same data —
-no more manual export/import between devices.
+no more manual export/import between devices. Works fully offline (e.g. at the
+gym with no signal) and syncs automatically once you're back online.
 
 - `server/` — Express API + JSON-file data store (`server/data/data.json`, not
   committed to git).
@@ -55,6 +56,20 @@ not just your home Wi-Fi — fully private, never exposed to the public internet
 4. On your phone (with Tailscale connected), open
    `http://<your-desktop-tailscale-name>:3001` in the browser.
 5. Use the browser's "Add to Home Screen" option to install it as an app.
+
+## Working offline
+
+The app caches your data to the phone/browser itself and installs a service
+worker that precaches the app shell, so it keeps working with zero signal —
+open it, log a workout, and it saves locally right away. The topbar pill
+shows the sync state: **Synced**, **Offline**, or **N pending sync**. Once
+you're back on a network that can reach the server (home Wi-Fi, or Tailscale
+from anywhere), anything queued syncs automatically within a few seconds —
+no action needed.
+
+The one requirement: the app needs to have loaded at least once, while
+online, on a given phone/browser before it has anything to work from offline.
+After that first load, it's good to go without a connection.
 
 ## Backup
 

@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { useApp } from '../../../state/AppContext.jsx';
-import { api } from '../../../api/client.js';
 import { cloneBlocksAsTemplate, draftFromWorkout, newDraft, val } from '../../../lib/draft.js';
 import { exerciseGroupOf } from '../../../lib/selectors.js';
 import { nowTimeStr } from '../../../lib/dateUtils.js';
+import { uid } from '../../../lib/id.js';
 import ModalShell from '../ModalShell.jsx';
 import { DraftProvider, useDraft } from './DraftContext.jsx';
 import StepSetup from './StepSetup.jsx';
@@ -31,7 +31,7 @@ function cleanForSave(draft, data) {
 }
 
 function BuilderBody({ initialDate }) {
-  const { data, ui, refresh, openModal, closeModal, showToast } = useApp();
+  const { data, ui, submit, openModal, closeModal, showToast } = useApp();
   const { draft, update } = useDraft();
   const [saving, setSaving] = useState(false);
 
@@ -58,32 +58,34 @@ function BuilderBody({ initialDate }) {
       cleanedBlocks.forEach((b) => b.exercises.forEach((ex) => {
         if (!(data.exercises[ex.muscleGroup] || []).includes(ex.name)) newNames.push([ex.muscleGroup, ex.name]);
       }));
-      await Promise.all(newNames.map(([group, name]) => api.addExercise(group, name)));
-
-      if (draft.editingId) {
-        const existing = data.workouts.find((w) => w.id === draft.editingId);
-        await api.updateWorkout(draft.editingId, {
-          ...existing,
-          date: draft.date,
-          category: draft.category,
-          bodyWeight: draft.bodyWeight === '' ? null : Number(draft.bodyWeight),
-          blocks: cleanedBlocks,
-          cardio: cleanedCardio,
-        });
-      } else {
-        await api.createWorkout({
-          userId: ui.currentUserId,
-          date: draft.date,
-          category: draft.category,
-          bodyWeight: draft.bodyWeight === '' ? null : Number(draft.bodyWeight),
-          startTime: draft.startTime || null,
-          endTime: nowTimeStr(),
-          notes: '',
-          blocks: cleanedBlocks,
-          cardio: cleanedCardio,
-        });
+      // Sequential, not parallel: each op goes through the same outbox-ordering
+      // path as everything else, so a Promise.all here would race them.
+      for (const [group, name] of newNames) {
+        await submit({ entity: 'exercise', action: 'add', muscleGroup: group, name });
       }
-      await refresh();
+
+      const id = draft.editingId || uid('w');
+      const payload = draft.editingId
+        ? {
+            ...data.workouts.find((w) => w.id === draft.editingId),
+            date: draft.date,
+            category: draft.category,
+            bodyWeight: draft.bodyWeight === '' ? null : Number(draft.bodyWeight),
+            blocks: cleanedBlocks,
+            cardio: cleanedCardio,
+          }
+        : {
+            userId: ui.currentUserId,
+            date: draft.date,
+            category: draft.category,
+            bodyWeight: draft.bodyWeight === '' ? null : Number(draft.bodyWeight),
+            startTime: draft.startTime || null,
+            endTime: nowTimeStr(),
+            notes: '',
+            blocks: cleanedBlocks,
+            cardio: cleanedCardio,
+          };
+      await submit({ entity: 'workout', action: 'upsert', id, payload });
       openModal({ type: 'dayDetail', date: draft.date });
     } catch (err) {
       showToast(err.message);

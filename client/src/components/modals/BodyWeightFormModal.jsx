@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useApp } from '../../state/AppContext.jsx';
-import { api } from '../../api/client.js';
+import { uid } from '../../lib/id.js';
 import ModalShell from './ModalShell.jsx';
 
 export default function BodyWeightFormModal({ date: initialDate, editingId }) {
-  const { data, ui, refresh, openModal, closeModal, showToast } = useApp();
+  const { data, ui, submit, openModal, closeModal, showToast } = useApp();
   const existing = editingId ? (data.bodyWeights || []).find((b) => b.id === editingId) : null;
 
   const [date, setDate] = useState(existing ? existing.date : initialDate);
@@ -19,19 +19,20 @@ export default function BodyWeightFormModal({ date: initialDate, editingId }) {
     }
     setSaving(true);
     try {
+      let id, payload;
       if (existing) {
-        await api.updateBodyWeight(existing.id, { ...existing, date, weight: Number(trimmedWeight) });
+        id = existing.id;
+        payload = { ...existing, date, weight: Number(trimmedWeight) };
       } else {
         // Match the original app's upsert-by-date behavior: a new entry for a
         // date that already has one overwrites it instead of duplicating.
         const clash = (data.bodyWeights || []).find((b) => b.userId === ui.currentUserId && b.date === date);
-        if (clash) {
-          await api.updateBodyWeight(clash.id, { ...clash, weight: Number(trimmedWeight) });
-        } else {
-          await api.createBodyWeight({ userId: ui.currentUserId, date, weight: Number(trimmedWeight) });
-        }
+        id = clash ? clash.id : uid('bw');
+        payload = clash
+          ? { ...clash, weight: Number(trimmedWeight) }
+          : { userId: ui.currentUserId, date, weight: Number(trimmedWeight) };
       }
-      await refresh();
+      await submit({ entity: 'bodyWeight', action: 'upsert', id, payload });
       openModal({ type: 'dayDetail', date });
     } catch (err) {
       showToast(err.message);

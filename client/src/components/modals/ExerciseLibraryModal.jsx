@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useApp } from '../../state/AppContext.jsx';
-import { api } from '../../api/client.js';
 import { MUSCLE_GROUPS } from '../../lib/constants.js';
 import ModalShell from './ModalShell.jsx';
 
 export default function ExerciseLibraryModal() {
-  const { data, refresh, closeModal, openModal, showToast } = useApp();
+  const { data, submit, closeModal, openModal, showToast } = useApp();
   const groups = [
     ...MUSCLE_GROUPS,
     ...Object.keys(data.exercises).filter((g) => !MUSCLE_GROUPS.includes(g) && g !== 'Cardio'),
@@ -19,8 +18,7 @@ export default function ExerciseLibraryModal() {
     if (!trimmed) return;
     setSaving(true);
     try {
-      await api.addExercise(group, trimmed);
-      await refresh();
+      await submit({ entity: 'exercise', action: 'add', muscleGroup: group, name: trimmed });
       setName('');
     } catch (err) {
       showToast(err.message);

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useApp } from '../../state/AppContext.jsx';
-import { api } from '../../api/client.js';
+import { uid } from '../../lib/id.js';
 import ModalShell from './ModalShell.jsx';
 
 export default function EventFormModal({ date: initialDate, editingId }) {
-  const { data, ui, refresh, openModal, closeModal, showToast } = useApp();
+  const { data, ui, submit, openModal, closeModal, showToast } = useApp();
   const existing = editingId ? data.events.find((e) => e.id === editingId) : null;
 
   const [date, setDate] = useState(existing ? existing.date : initialDate);
@@ -17,12 +17,11 @@ export default function EventFormModal({ date: initialDate, editingId }) {
     if (!date || !trimmedTitle) { showToast('Add a date and title.'); return; }
     setSaving(true);
     try {
-      if (existing) {
-        await api.updateEvent(existing.id, { ...existing, date, title: trimmedTitle, notes: notes.trim() });
-      } else {
-        await api.createEvent({ userId: ui.currentUserId, date, title: trimmedTitle, notes: notes.trim() });
-      }
-      await refresh();
+      const id = existing ? existing.id : uid('evt');
+      const payload = existing
+        ? { ...existing, date, title: trimmedTitle, notes: notes.trim() }
+        : { userId: ui.currentUserId, date, title: trimmedTitle, notes: notes.trim() };
+      await submit({ entity: 'event', action: 'upsert', id, payload });
       openModal({ type: 'dayDetail', date });
     } catch (err) {
       showToast(err.message);

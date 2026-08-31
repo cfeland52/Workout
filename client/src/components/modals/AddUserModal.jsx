@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { useApp } from '../../state/AppContext.jsx';
-import { api } from '../../api/client.js';
+import { uid } from '../../lib/id.js';
 import ModalShell from './ModalShell.jsx';
 
 export default function AddUserModal() {
-  const { refresh, selectUser, closeModal, showToast } = useApp();
+  const { submit, selectUser, closeModal, showToast } = useApp();
   const [name, setName] = useState('');
   const [saving, setSaving] = useState(false);
 
@@ -13,10 +13,10 @@ export default function AddUserModal() {
     if (!trimmed) return;
     setSaving(true);
     try {
-      const user = await api.createUser(trimmed);
-      await refresh();
-      selectUser(user.id);
-      showToast(`Welcome, ${user.name}.`);
+      const id = uid('user');
+      await submit({ entity: 'user', action: 'upsert', id, payload: { name: trimmed } });
+      selectUser(id);
+      showToast(`Welcome, ${trimmed}.`);
     } catch (err) {
       showToast(err.message);
     } finally {

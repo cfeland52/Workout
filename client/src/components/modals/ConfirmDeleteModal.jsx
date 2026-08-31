@@ -1,23 +1,28 @@
 import { useState } from 'react';
 import { useApp } from '../../state/AppContext.jsx';
-import { api } from '../../api/client.js';
 import ModalShell from './ModalShell.jsx';
+
+const ENTITY_BY_KIND = {
+  deleteWorkout: 'workout',
+  deleteEvent: 'event',
+  deleteBodyWeight: 'bodyWeight',
+};
 
 // spec: { kind: 'deleteWorkout'|'deleteEvent'|'deleteBodyWeight'|'removeExercise',
 //         id, group, name, returnDate, message, confirmLabel }
 export default function ConfirmDeleteModal({ spec }) {
-  const { refresh, closeModal, openModal, showToast } = useApp();
+  const { submit, closeModal, openModal, showToast } = useApp();
   const [busy, setBusy] = useState(false);
 
   async function handleConfirm() {
     setBusy(true);
     try {
-      if (spec.kind === 'deleteWorkout') await api.deleteWorkout(spec.id);
-      else if (spec.kind === 'deleteEvent') await api.deleteEvent(spec.id);
-      else if (spec.kind === 'deleteBodyWeight') await api.deleteBodyWeight(spec.id);
-      else if (spec.kind === 'removeExercise') await api.removeExercise(spec.group, spec.name);
+      if (spec.kind === 'removeExercise') {
+        await submit({ entity: 'exercise', action: 'remove', muscleGroup: spec.group, name: spec.name });
+      } else {
+        await submit({ entity: ENTITY_BY_KIND[spec.kind], action: 'delete', id: spec.id });
+      }
 
-      await refresh();
       if (spec.kind === 'removeExercise') openModal({ type: 'exerciseLibrary' });
       else if (spec.returnDate) openModal({ type: 'dayDetail', date: spec.returnDate });
       else closeModal();
