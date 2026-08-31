@@ -1,0 +1,4793 @@
+{
+  "app": "workout-book",
+  "exportedAt": "2026-08-24 07:36",
+  "state": {
+    "users": [
+      {
+        "id": "clay",
+        "name": "Clay"
+      }
+    ],
+    "currentSchemaVersion": 1,
+    "exercises": {
+      "Chest": [
+        "SB Flat Bench",
+        "DB Flat Bench",
+        "SB Incline Bench",
+        "DB Incline Bench",
+        "Machine Press",
+        "Machine Incline Press",
+        "Machine Decline Press",
+        "DB Flat Fly",
+        "DB Incline Fly",
+        "DB Standing Fly",
+        "Machine Fly",
+        "Cable Fly (High)",
+        "Cable Fly (Mid)",
+        "Cable Fly (Low)",
+        "Machine Chest Fly",
+        "Flat DB Press",
+        "Plate Squeeze",
+        "Decline Machine Chest Press"
+      ],
+      "Back": [
+        "Wide Grip Lat Pulldown",
+        "Close Grip Lat Pulldown",
+        "Single Arm Lat Pulldown",
+        "Wide Grip Seated Row",
+        "Close Grip Seated Row",
+        "Single Arm Seated Row",
+        "SB Bent Over Row (Overhand)",
+        "SB Bent Over Row (Underhand)",
+        "DB Bent Over Row",
+        "Chest Supported DB Row",
+        "Straight Arm Pulldown",
+        "Machine High Row",
+        "Close Grip T-Bar Row",
+        "Wide Grip T-Bar Row",
+        "SB Deadlift",
+        "Close Grip Machine Row",
+        "Overhand Machine Row",
+        "Hammer Strength ISO Row",
+        "Hammer Strength Row",
+        "Seated CG Cable Row",
+        "DB Row",
+        "St.A Pull-down",
+        "Back Extension"
+      ],
+      "Shoulders": [
+        "DB Military Press",
+        "SB Military Press",
+        "DB Side Raise",
+        "Cable Side Raise",
+        "Machine Side Raise",
+        "DB Front Raise",
+        "SB Front Raise",
+        "Cable Front Raise",
+        "Chest Supported DB Front Raise",
+        "2-Way Shoulders (Plate)",
+        "Arnold Press",
+        "Standing SB Military Press",
+        "SB Shrug",
+        "DB Upright Row",
+        "Cable SA Front Raise",
+        "2 Way Shoulder"
+      ],
+      "Legs": [
+        "Squat",
+        "Gobblet Squat",
+        "Hack Squat",
+        "Leg Press",
+        "SB RDL",
+        "DB RDL",
+        "DB Lunges",
+        "SB Lunges",
+        "Bulgarian Split Squat",
+        "Leg Extension",
+        "Leg Curl",
+        "Adductor",
+        "Abductor",
+        "Hip Thruster (Machine)",
+        "Seated Calf Raises",
+        "Hip Thruster (SB)",
+        "SB Back Squats",
+        "Elevated SB RDL",
+        "Single Leg Quad Ext"
+      ],
+      "Biceps": [
+        "Standing DB Curl",
+        "Seated DB Curl",
+        "DB Iso Curl",
+        "Incline DB Curl",
+        "DB Hammer Curl",
+        "EZ Bar Curl",
+        "SB Curl",
+        "EZ Bar Reverse Curl",
+        "SB Reverse Curl",
+        "DB Preacher Curl",
+        "EZ Bar Preacher Curl",
+        "SB Preacher Curl",
+        "SA Cable Curl",
+        "Cable Reverse Curl",
+        "Seated DB Hammer Curl",
+        "Spider Rev Curl",
+        "Plate Machine Curl",
+        "Machine Curl",
+        "Ez Bar Curl"
+      ],
+      "Triceps": [
+        "DB Overhead Tricep Ext",
+        "SB Overhead Tricep Ext",
+        "Cable Overhead Tricep Ext",
+        "SA DB Overhead Tricep Ext",
+        "EZ Bar Skull Crusher",
+        "SB Skull Crusher",
+        "EZ Bar Incline Skull Crusher",
+        "SB Incline Skull Crusher",
+        "DB Tricep Kickback",
+        "Cable Tricep Kickback",
+        "Cable Tricep Pushdown",
+        "SA Cable Tricep Pushdown",
+        "Plate Loaded Machine Dips",
+        "SA Cable Tri Pushdown",
+        "Rope Tri Pushdown",
+        "Rope Pushdowns",
+        "Vbar OH Tri Ext",
+        "Vbar Tri Pushdown",
+        "Vbar Cable OH Tri Ext",
+        "Rope OH Tri Ext"
+      ],
+      "Traps": [
+        "EZ Bar Upright Row",
+        "SB Upright Row",
+        "DB Shrugs",
+        "SB Shrugs",
+        "DB Rear Delt Fly",
+        "Machine Rear Delt Fly",
+        "Face Pull"
+      ],
+      "Abs": [
+        "Cable Crunch",
+        "Hanging Leg Raise",
+        "Cable Trunk Twist",
+        "Circuit*",
+        "TTB",
+        "KB V Up",
+        "Lying Leg Lifts",
+        "KB Woodchopper",
+        "KB Swing"
+      ],
+      "Body": [
+        "Pull Ups",
+        "Push Ups",
+        "Pull-up",
+        "CG Pull-up"
+      ],
+      "Cardio": [
+        "Treadmill",
+        "Row Machine",
+        "Bike",
+        "Other"
+      ]
+    },
+    "workouts": [
+      {
+        "id": "w-c159bc26",
+        "userId": "clay",
+        "date": "2026-04-11",
+        "category": "Legs",
+        "bodyWeight": 254,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Abductor",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "25",
+                    "weight": "100"
+                  },
+                  {
+                    "reps": "25",
+                    "weight": "120"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "140"
+                  }
+                ]
+              },
+              {
+                "name": "Adductor",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "25",
+                    "weight": "80"
+                  },
+                  {
+                    "reps": "25",
+                    "weight": "100"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "120"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Single Leg Quad Ext",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "40"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "40"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "40"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Back Squats",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "135"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Elevated SB RDL",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Seated Calf Raises",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "70"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": [
+          {
+            "machine": "Row Machine",
+            "intervals": [
+              {
+                "distance": "500m",
+                "split": "1:48.1"
+              },
+              {
+                "distance": "500m",
+                "split": "1:52.3"
+              },
+              {
+                "distance": "500m",
+                "split": "1:59.8"
+              }
+            ],
+            "rests": [
+              "0:45",
+              "0:45"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "w-f8158faa",
+        "userId": "clay",
+        "date": "2026-04-15",
+        "category": "Chest",
+        "bodyWeight": 252,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Machine Chest Fly",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "110"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "110"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Incline Press",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "135"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "High Cable Fly",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "15"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "15"
+                  }
+                ]
+              },
+              {
+                "name": "SA Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "15"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "15"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Low Cable Fly",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "20"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "20"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Vbar OH Tri Ext",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  }
+                ]
+              },
+              {
+                "name": "Vbar Tri Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-402c0251",
+        "userId": "clay",
+        "date": "2026-04-17",
+        "category": "Legs",
+        "bodyWeight": 254,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Abductor",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "25",
+                    "weight": "100"
+                  },
+                  {
+                    "reps": "25",
+                    "weight": "120"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "140"
+                  }
+                ]
+              },
+              {
+                "name": "Adductor",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "25",
+                    "weight": "80"
+                  },
+                  {
+                    "reps": "25",
+                    "weight": "100"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "120"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Back Squats",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "185"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "185"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Elevated SB RDL",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Single Leg Quad Ext",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "100"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "100"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "10",
+                        "weight": "100"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "50"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Seated Calf Raises",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "70"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": [
+          {
+            "machine": "Row Machine",
+            "intervals": [
+              {
+                "distance": "500m",
+                "split": "1:48.1"
+              },
+              {
+                "distance": "500m",
+                "split": "1:52.3"
+              },
+              {
+                "distance": "500m",
+                "split": "1:59.8"
+              }
+            ],
+            "rests": [
+              "0:45",
+              "0:45"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "w-c3690ddc",
+        "userId": "clay",
+        "date": "2026-07-01",
+        "category": "Upper",
+        "bodyWeight": 250,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Abductor",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "100"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "100"
+                  }
+                ]
+              },
+              {
+                "name": "Adductor",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "100"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "100"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Hammer Strength ISO Row",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "160"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Flat Bench",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "185"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "10",
+                        "weight": "185"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "135"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Incline DB Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SA Cable Tri Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "20",
+                        "weight": "20"
+                      },
+                      {
+                        "reps": "15",
+                        "weight": "20"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "20"
+                      },
+                      {
+                        "reps": "5",
+                        "weight": "20"
+                      }
+                    ]
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "20",
+                        "weight": "20"
+                      },
+                      {
+                        "reps": "15",
+                        "weight": "20"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "20"
+                      },
+                      {
+                        "reps": "5",
+                        "weight": "20"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-d9268d7b",
+        "userId": "clay",
+        "date": "2026-07-03",
+        "category": "Lower",
+        "bodyWeight": 255,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Abductor",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "30",
+                    "weight": "80"
+                  },
+                  {
+                    "reps": "25",
+                    "weight": "100"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "120"
+                  }
+                ]
+              },
+              {
+                "name": "Adductor",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "30",
+                    "weight": "60"
+                  },
+                  {
+                    "reps": "25",
+                    "weight": "80"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "100"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Back Squats",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "135"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB RDL",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Single Leg Quad Ext",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "30"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Seated Calf Raises",
+                "muscleGroup": "Legs",
+                "sets": []
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-eef6b9b0",
+        "userId": "clay",
+        "date": "2026-07-04",
+        "category": "Upper",
+        "bodyWeight": 255,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Flat Bench",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "5",
+                    "weight": "225"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "250"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "250"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "5",
+                        "weight": "250"
+                      },
+                      {
+                        "reps": "15",
+                        "weight": "135"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Pull-up",
+                "muscleGroup": "Body",
+                "sets": [
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "DB Military Press",
+                "muscleGroup": "Shoulders",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Incline DB Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  }
+                ]
+              },
+              {
+                "name": "DB Kickback",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "15"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "15"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "15"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Seated CG Cable Row",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "110"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "122"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "122"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Rope Tri Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "60"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  }
+                ]
+              },
+              {
+                "name": "Cable Crunch",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "88"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "88"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "88"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "SA Cable Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "16.5"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "16.5"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "10-10",
+                        "weight": "22"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "TTB",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": [
+          {
+            "machine": "Treadmill",
+            "time": "25 min",
+            "speed": "3 mph",
+            "incline": "12"
+          }
+        ]
+      },
+      {
+        "id": "w-290afa47",
+        "userId": "clay",
+        "date": "2026-07-07",
+        "category": "Upper",
+        "bodyWeight": 250,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Pull-up",
+                "muscleGroup": "Body",
+                "sets": [
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  }
+                ]
+              },
+              {
+                "name": "SB Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "95"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "95"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "95"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Standing SB Military Press",
+                "muscleGroup": "Shoulders",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "95"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "95"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "95"
+                  }
+                ]
+              },
+              {
+                "name": "2 Way Shoulder",
+                "muscleGroup": "Shoulders",
+                "sets": [
+                  {
+                    "reps": "15/15",
+                    "weight": "10"
+                  },
+                  {
+                    "reps": "15/15",
+                    "weight": "10"
+                  },
+                  {
+                    "reps": "15/15",
+                    "weight": "10"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "DB Bent Over Row",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  }
+                ]
+              },
+              {
+                "name": "Incline DB Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Decline Machine Chest Press",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "225"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "225"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "275"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SA Cable Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "15",
+                        "weight": "22"
+                      },
+                      {
+                        "reps": "20",
+                        "weight": "16.5"
+                      },
+                      {
+                        "reps": "25",
+                        "weight": "11"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-0a401306",
+        "userId": "clay",
+        "date": "2026-07-12",
+        "category": "Shoulders",
+        "bodyWeight": null,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Arnold Press",
+                "muscleGroup": "Shoulders",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "40"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "40"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "40"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Incline Skull Crusher",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "80"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "80"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "80"
+                  }
+                ]
+              },
+              {
+                "name": "DB Side Raise",
+                "muscleGroup": "Shoulders",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Cable Front Raise",
+                "muscleGroup": "Shoulders",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "16.5"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "16.5"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "16.5"
+                  }
+                ]
+              },
+              {
+                "name": "TTB",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SA Cable Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "22"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "20",
+                        "weight": "22"
+                      },
+                      {
+                        "reps": "20",
+                        "weight": "16.5"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-3e147979",
+        "userId": "clay",
+        "date": "2026-07-14",
+        "category": "Back",
+        "bodyWeight": 253,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "WG Lat Pull-down",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "121"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "165"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "165"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "DB Row",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "70"
+                  }
+                ]
+              },
+              {
+                "name": "Incline DB Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "35"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "35"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "15",
+                        "weight": "35"
+                      },
+                      {
+                        "reps": "15",
+                        "weight": "20"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Back Extension",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  }
+                ]
+              },
+              {
+                "name": "DB Hammer Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "35"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "35"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "35"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Hammer Strength Row",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "St.A Pull-down",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "60"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "60"
+                  }
+                ]
+              },
+              {
+                "name": "TTB",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Plate Machine Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "12",
+                        "weight": "45"
+                      },
+                      {
+                        "reps": "12",
+                        "weight": "35"
+                      },
+                      {
+                        "reps": "12",
+                        "weight": "25"
+                      }
+                    ]
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "12",
+                        "weight": "45"
+                      },
+                      {
+                        "reps": "12",
+                        "weight": "35"
+                      },
+                      {
+                        "reps": "12",
+                        "weight": "25"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-309cfd9d",
+        "userId": "clay",
+        "date": "2026-07-18",
+        "category": "Chest",
+        "bodyWeight": 253,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Incline Bench",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "185"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "205"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "205"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Flat DB Press",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "80"
+                  },
+                  {
+                    "reps": "9",
+                    "weight": "80"
+                  },
+                  {
+                    "reps": "9",
+                    "weight": "80"
+                  }
+                ]
+              },
+              {
+                "name": "Plate Squeeze",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "25"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "SB Incline Skull Crusher",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "90"
+                  }
+                ]
+              },
+              {
+                "name": "DB Low Fly",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "35"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "35"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "35"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "SA Cable Tri Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "12",
+                        "weight": "27.5"
+                      },
+                      {
+                        "reps": "12",
+                        "weight": "22"
+                      }
+                    ]
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "12",
+                        "weight": "27.5"
+                      },
+                      {
+                        "reps": "15",
+                        "weight": "22"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "TTB",
+                "muscleGroup": "Abs",
+                "sets": []
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Rope Pushdowns",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "14",
+                    "weight": "55"
+                  }
+                ]
+              },
+              {
+                "name": "Cable Crunch",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "88"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "88"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "88"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": [
+          {
+            "machine": "Treadmill",
+            "time": "25 min",
+            "speed": "3 mph",
+            "incline": "12"
+          }
+        ]
+      },
+      {
+        "id": "w-3aa80edf",
+        "userId": "clay",
+        "date": "2026-07-19",
+        "category": "Shoulders",
+        "bodyWeight": null,
+        "startTime": null,
+        "endTime": null,
+        "notes": "Shoulders / Traps",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "CG Pull-up",
+                "muscleGroup": "Body",
+                "sets": [
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Shrug",
+                "muscleGroup": "Traps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "225"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "225"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "DB Military Press",
+                "muscleGroup": "Shoulders",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  }
+                ]
+              },
+              {
+                "name": "DB Upright Row",
+                "muscleGroup": "Traps",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "70"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Cable SA Front Raise",
+                "muscleGroup": "Shoulders",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "15"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "15"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "15"
+                  }
+                ]
+              },
+              {
+                "name": "SA Cable Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "15"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "15"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "20"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "KB Swing",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "35"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "35"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "35"
+                  }
+                ]
+              },
+              {
+                "name": "KB Woodchopper",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "35"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "35"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "35"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "KB V Up",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "35"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "35"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "35"
+                  }
+                ]
+              },
+              {
+                "name": "Lying Leg Lifts",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-db1aaf8b",
+        "userId": "clay",
+        "date": "2026-07-21",
+        "category": "Back",
+        "bodyWeight": 251,
+        "startTime": null,
+        "endTime": null,
+        "notes": "Back (Light)",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "WG Lat Pull-down",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "99"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "110"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "121"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Hammer Strength Row",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "15 (CG)",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "15 (CG)",
+                    "weight": "90"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Back Extension",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  }
+                ]
+              },
+              {
+                "name": "DB Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  }
+                ]
+              },
+              {
+                "name": "DB Hammer Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "St.A Pull-down",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "60"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "60"
+                  }
+                ]
+              },
+              {
+                "name": "TTB",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-89084556",
+        "userId": "clay",
+        "date": "2026-07-22",
+        "category": "Chest",
+        "bodyWeight": 253,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Incline Bench",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "185"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "185"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "185"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Flat DB Press",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  }
+                ]
+              },
+              {
+                "name": "Plate Squeeze",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Vbar Cable OH Tri Ext",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "50"
+                  }
+                ]
+              },
+              {
+                "name": "Cable Crunch",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "88"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "88"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "88"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SA Cable Tri Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "22"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "22"
+                  },
+                  {
+                    "reps": "-",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "16.5"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": [
+          {
+            "machine": "Treadmill",
+            "time": "25 min",
+            "speed": "3 mph",
+            "incline": "12"
+          }
+        ]
+      },
+      {
+        "id": "w-402c2623",
+        "userId": "clay",
+        "date": "2026-07-24",
+        "category": "Upper",
+        "bodyWeight": 250,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Flat Bench",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "8",
+                    "weight": "225"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "225"
+                  },
+                  {
+                    "reps": "6",
+                    "weight": "225"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "DB Bent Over Row",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "80"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "80"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "80"
+                  }
+                ]
+              },
+              {
+                "name": "DB Incline Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "40"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "40"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "12-12p12",
+                        "weight": "40-25p25"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Spider Rev Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "70"
+                  }
+                ]
+              },
+              {
+                "name": "DB Incline Fly",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SA Cable Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "22"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "15",
+                        "weight": "27"
+                      },
+                      {
+                        "reps": "20",
+                        "weight": "22"
+                      },
+                      {
+                        "reps": "25",
+                        "weight": "16.5"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SA Cable Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "16.5"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "16.5"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-6d681a76",
+        "userId": "clay",
+        "date": "2026-07-26",
+        "category": "Upper",
+        "bodyWeight": 253,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Flat Bench",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "8",
+                    "weight": "225"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "225"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "6",
+                        "weight": "225"
+                      },
+                      {
+                        "reps": "6",
+                        "weight": "185"
+                      },
+                      {
+                        "reps": "8",
+                        "weight": "135"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "DB Bent over Row",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  }
+                ]
+              },
+              {
+                "name": "Ez Bar Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "70"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Seated DB Hammer Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "45"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "45"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "12",
+                        "weight": "45"
+                      },
+                      {
+                        "reps": "20",
+                        "weight": "25"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "Curl Variation (unlabeled in source)",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Rope OH Tri Ext",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "50"
+                  }
+                ]
+              },
+              {
+                "name": "Cable Crunch",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "88"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "88"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "88"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SA Cable Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "22"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "27.5"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "10",
+                        "weight": "27.5"
+                      },
+                      {
+                        "reps": "15",
+                        "weight": "22"
+                      },
+                      {
+                        "reps": "20",
+                        "weight": "16.5"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SA Cable Tri Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "25",
+                        "weight": "16.5"
+                      },
+                      {
+                        "reps": "25",
+                        "weight": "16.5"
+                      }
+                    ]
+                  },
+                  {
+                    "reps": "25",
+                    "weight": "16.5"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Machine Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "15",
+                        "weight": "70"
+                      },
+                      {
+                        "reps": "15",
+                        "weight": "40"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-ce0ef3e5",
+        "userId": "clay",
+        "date": "2026-07-27",
+        "category": "Legs",
+        "bodyWeight": 251,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Abductor",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "30",
+                    "weight": "100"
+                  },
+                  {
+                    "reps": "25",
+                    "weight": "120"
+                  }
+                ]
+              },
+              {
+                "name": "Adductor",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "30",
+                    "weight": "80"
+                  },
+                  {
+                    "reps": "25",
+                    "weight": "100"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Back Squats",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "185"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Elevated SB RDL",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Single Leg Quad Ext",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "100"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "10",
+                        "weight": "100"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "80"
+                      }
+                    ]
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "10",
+                        "weight": "100"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "80"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "50"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Seated Calf Raises",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "70"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "70"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-31014d74",
+        "userId": "clay",
+        "date": "2026-07-29",
+        "category": "Back",
+        "bodyWeight": 250,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "WG Lat Pull-down",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "121"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "143"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "165"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Hammer Strength Row",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "15 (CG)",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "15 (CG)",
+                    "weight": "90"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Back Extension",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  }
+                ]
+              },
+              {
+                "name": "DB Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "-",
+                    "weight": "-"
+                  }
+                ]
+              },
+              {
+                "name": "DB Hammer Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "-",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "St.A Pull-down",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "60"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "60"
+                  }
+                ]
+              },
+              {
+                "name": "TTB",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SA Cable Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "15",
+                        "weight": "20"
+                      },
+                      {
+                        "reps": "15",
+                        "weight": "15"
+                      }
+                    ]
+                  },
+                  {
+                    "reps": "-",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-705c9610",
+        "userId": "clay",
+        "date": "2026-07-30",
+        "category": "Chest",
+        "bodyWeight": 252,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Incline Bench",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "185"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "185"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "185"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Flat DB Press",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  }
+                ]
+              },
+              {
+                "name": "Plate Squeeze",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Vbar Cable OH Tri Ext",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "16",
+                    "weight": "55"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "55"
+                  }
+                ]
+              },
+              {
+                "name": "Cable Crunch",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "85"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "85"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SA Cable Tri Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "20"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "22"
+                  },
+                  {
+                    "reps": "-",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "16.5"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-964982d7",
+        "userId": "clay",
+        "date": "2026-08-01",
+        "category": "Upper",
+        "bodyWeight": 255,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Incline Bench",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "185"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "205"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "205"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "DB Bent Over Row",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  }
+                ]
+              },
+              {
+                "name": "Incline DB Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "40"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "40"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "40"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "SA Tri Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "22"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "27.5"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "10",
+                        "weight": "27.5"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "22"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "16.5"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "TTB",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Back Extensions",
+                "muscleGroup": "Back",
+                "sets": []
+              },
+              {
+                "name": "SB Rev Curl",
+                "muscleGroup": "Biceps",
+                "sets": []
+              }
+            ]
+          }
+        ],
+        "cardio": [
+          {
+            "machine": "Treadmill",
+            "time": "",
+            "speed": "3 mph",
+            "incline": "12"
+          }
+        ]
+      },
+      {
+        "id": "w-c7a2931f",
+        "userId": "clay",
+        "date": "2026-08-03",
+        "category": "Upper",
+        "bodyWeight": 254,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "SB Incline Press",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  }
+                ]
+              },
+              {
+                "name": "Pull-ups",
+                "muscleGroup": "Body",
+                "sets": [
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Back Ext",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "25"
+                  }
+                ]
+              },
+              {
+                "name": "SA DB Tri OH Ext",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Cable Tri Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "30",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "60"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "10",
+                        "weight": "70"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "60"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "50"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-ea4573cc",
+        "userId": "clay",
+        "date": "2026-08-04",
+        "category": "Upper",
+        "bodyWeight": 252,
+        "startTime": null,
+        "endTime": null,
+        "notes": "Upper 2",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Machine High Row",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "45"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "115"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Flat Bench",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "185"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "225"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Incline DB Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "35"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "35"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "15",
+                        "weight": "35"
+                      },
+                      {
+                        "reps": "15",
+                        "weight": "25"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "St.A pull-down",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  }
+                ]
+              },
+              {
+                "name": "TTB",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "EZ Rev Cable Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "50"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-3a89996a",
+        "userId": "clay",
+        "date": "2026-08-06",
+        "category": "Legs",
+        "bodyWeight": 253,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SL Hamstring Curls",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "30"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SL Quad Extension",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "50"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "60"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB RDL",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "135"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Back Squat",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "135"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Seated Calf Raise",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "90"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": [
+          {
+            "machine": "Row Machine",
+            "time": "3:37 min",
+            "totalDistance": "1019 meters",
+            "avgSplit": "1:46.6 avg/500m (33 spm)"
+          }
+        ]
+      },
+      {
+        "id": "w-4be795b5",
+        "userId": "clay",
+        "date": "2026-08-09",
+        "category": "Upper",
+        "bodyWeight": 254,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Pull-ups",
+                "muscleGroup": "Body",
+                "sets": [
+                  {
+                    "reps": "6",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "6",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Incline Bench",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "195"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "9",
+                        "weight": "205"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "135"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "DB Bent over row",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "85"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "85"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "85"
+                  }
+                ]
+              },
+              {
+                "name": "Incline DB Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "40"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "40"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "10",
+                        "weight": "40"
+                      },
+                      {
+                        "reps": "20",
+                        "weight": "25"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "SB Skull Crusher",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "90"
+                  }
+                ]
+              },
+              {
+                "name": "DB Standing Fly",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "25"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Bench Dip",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "-"
+                  }
+                ]
+              },
+              {
+                "name": "DB Hammer Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "40"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "40"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "WG (Black) Lat Pulldowns",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "148"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "148"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "148"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "SA Cable Tri Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "22"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "22"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "15",
+                        "weight": "22"
+                      },
+                      {
+                        "reps": "15",
+                        "weight": "16.5"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "name": "TTB",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "-"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SA Cable Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "16.5"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-ebbed435",
+        "userId": "clay",
+        "date": "2026-08-16",
+        "category": "Chest",
+        "bodyWeight": 265,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Flat Bench",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "225"
+                  },
+                  {
+                    "reps": "5",
+                    "weight": "255"
+                  },
+                  {
+                    "reps": "3",
+                    "weight": "275"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Low Cable Fly",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "20"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "20"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Mid Cable Fly",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "20"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "20"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Decline Machine Press",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "45"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "90"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "DB Incline Press",
+                "muscleGroup": "Chest",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "9",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "9",
+                    "weight": "90"
+                  }
+                ]
+              },
+              {
+                "name": "DB Curls (Norm&Hammer)",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "30",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "30",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "20",
+                    "weight": "40"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Cable Tri Pushdown",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "71"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "77"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "10",
+                        "weight": "77"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "55"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "33"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Cable Tri Kickback",
+                "muscleGroup": "Triceps",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "22"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "16.5"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "16.5"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      },
+      {
+        "id": "w-500a2188",
+        "userId": "clay",
+        "date": "2026-08-18",
+        "category": "Legs",
+        "bodyWeight": 256,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Leg Extension",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "220"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "10",
+                        "weight": "260"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "160"
+                      },
+                      {
+                        "reps": "10",
+                        "weight": "60"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SB Elevated RDL",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "185"
+                  },
+                  {
+                    "reps": "8",
+                    "weight": "225"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Leg Press",
+                "muscleGroup": "Legs",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "370"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "370"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "370"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": [
+          {
+            "machine": "Treadmill",
+            "time": "25 min",
+            "speed": "3 mph",
+            "incline": "12"
+          }
+        ]
+      },
+      {
+        "id": "w-c68396cc",
+        "userId": "clay",
+        "date": "2026-08-19",
+        "category": "Back",
+        "bodyWeight": 254,
+        "startTime": null,
+        "endTime": null,
+        "notes": "",
+        "blocks": [
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "WG Lat Pull-down",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "143"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "165"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "187"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Hammer Strength Row",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12 (CG)",
+                    "weight": "135"
+                  },
+                  {
+                    "reps": "12 (CG)",
+                    "weight": "135"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "Incline DB Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "12",
+                    "weight": "40"
+                  },
+                  {
+                    "reps": "12",
+                    "weight": "40"
+                  },
+                  {
+                    "reps": "12-15p15",
+                    "weight": "40-25"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "Back Extension",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  },
+                  {
+                    "reps": "10",
+                    "weight": "25"
+                  }
+                ]
+              },
+              {
+                "name": "DB Hammer Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  },
+                  {
+                    "reps": "-",
+                    "weight": "-"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "30"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "superset",
+            "exercises": [
+              {
+                "name": "St.A Pull-down",
+                "muscleGroup": "Back",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "60"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "60"
+                  }
+                ]
+              },
+              {
+                "name": "Cable Crunch",
+                "muscleGroup": "Abs",
+                "sets": [
+                  {
+                    "reps": "15",
+                    "weight": "90"
+                  },
+                  {
+                    "reps": "15",
+                    "weight": "90"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "standard",
+            "exercises": [
+              {
+                "name": "SA Cable Curl",
+                "muscleGroup": "Biceps",
+                "sets": [
+                  {
+                    "reps": "20",
+                    "weight": "20"
+                  },
+                  {
+                    "isDrop": true,
+                    "stages": [
+                      {
+                        "reps": "20",
+                        "weight": "20"
+                      },
+                      {
+                        "reps": "20",
+                        "weight": "15"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "cardio": []
+      }
+    ],
+    "events": [
+      {
+        "id": "e-8c753f82",
+        "userId": "clay",
+        "date": "2026-04-10",
+        "title": "Stillwater 500 Ride",
+        "notes": ""
+      },
+      {
+        "id": "e-4e187403",
+        "userId": "clay",
+        "date": "2026-08-02",
+        "title": "Stillwater Ride Day",
+        "notes": ""
+      },
+      {
+        "id": "e-a0171cd6",
+        "userId": "clay",
+        "date": "2026-08-08",
+        "title": "Draper",
+        "notes": ""
+      },
+      {
+        "id": "e-17b80a88",
+        "userId": "clay",
+        "date": "2026-08-17",
+        "title": "Draper",
+        "notes": "Routes: 1 Red, 1.5 Blue"
+      }
+    ],
+    "bodyWeights": [
+      {
+        "id": "bw-7vcn3rj3",
+        "userId": "clay",
+        "date": "2026-08-24",
+        "weight": 251
+      }
+    ]
+  }
+}
