@@ -455,6 +455,13 @@ function initPersistence() {
 }
 
 /* ---------------- backup: export / import a .json snapshot ---------------- */
+/* FILE_DOWNLOAD_STRIP_START — real-file download path. Only reachable
+   outside the Claude artifact viewer (the standalone HTML file), where
+   window.claude does not exist. The artifact-fragment build strips this
+   whole block at build time: the artifact viewer blocks plain <a download>
+   saves outright, and merely having download-triggering code in the page
+   makes the artifact ineligible for public (no-login) sharing — even when,
+   as here, the code path is unreachable at runtime inside that viewer. */
 function downloadViaBlob(filename, json) {
   var blob = new Blob([json], { type: 'application/json' });
   var url = URL.createObjectURL(blob);
@@ -466,37 +473,59 @@ function downloadViaBlob(filename, json) {
   a.remove();
   setTimeout(function () { URL.revokeObjectURL(url); }, 4000);
 }
+/* FILE_DOWNLOAD_STRIP_END */
 
 function exportBackup() {
   var payload = { app: 'workout-book', exportedAt: nowStampStr(), state: STATE };
   var json = JSON.stringify(payload, null, 2);
   var filename = 'workout-book-backup-' + todayStr() + '.json';
 
-  /* Inside the Claude artifact viewer, plain <a download> links are inert —
-     file offers go through the `downloads` capability instead. Outside it
-     (the standalone HTML file), window.claude doesn't exist at all, so this
-     falls straight through to the ordinary blob-download trick. */
-  if (typeof window !== 'undefined' && window.claude && typeof window.claude.use === 'function') {
-    window.claude.use('downloads').then(function (downloads) {
-      if (!downloads) { downloadViaBlob(filename, json); showToast('Backup downloaded.'); return; }
-      downloads.save({ filename: filename, data: json }).then(function () {
+  /* Inside the Claude artifact viewer, window.claude is always present, so
+     this always shows the copy/paste backup modal there — no download
+     ever offered. Outside it (the standalone HTML file), window.claude
+     doesn't exist, so this goes to the blob-download trick above — except
+     in the artifact-fragment build, where that block is stripped entirely
+     at build time, so downloadViaBlob won't even exist; the typeof check
+     below is what makes this one function work correctly in both builds. */
+  if (typeof window === 'undefined' || !window.claude || typeof window.claude.use !== 'function') {
+    if (typeof downloadViaBlob === 'function') {
+      try {
+        downloadViaBlob(filename, json);
         showToast('Backup downloaded.');
-      }, function (err) {
-        if (err && err.code === 'declined') { showToast('Backup canceled.'); }
-        else { showToast("Couldn't save the backup file — try again."); }
-      });
-    }, function () {
-      try { downloadViaBlob(filename, json); showToast('Backup downloaded.'); }
-      catch (e) { showToast("Couldn't create a backup file on this device."); }
-    });
-    return;
+      } catch (e) {
+        showToast("Couldn't create a backup file on this device.");
+      }
+      return;
+    }
   }
 
-  try {
-    downloadViaBlob(filename, json);
-    showToast('Backup downloaded.');
-  } catch (e) {
-    showToast("Couldn't create a backup file on this device.");
+  showBackupTextModal(filename, json);
+}
+
+function showBackupTextModal(filename, json) {
+  UI.modal = { type: 'backupText', filename: filename, json: json };
+  render();
+  var ta = document.getElementById('bw-backup-text');
+  if (ta) { ta.focus(); ta.select(); }
+}
+
+function copyBackupText() {
+  var ta = document.getElementById('bw-backup-text');
+  var text = ta ? ta.value : '';
+  if (ta) { ta.focus(); ta.select(); }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function () {
+      showToast('Copied — paste it somewhere safe (Notes, an email to yourself, etc).');
+    }, function () {
+      showToast('Could not auto-copy — the text is selected, so use your device’s Copy command.');
+    });
+  } else {
+    try {
+      document.execCommand('copy');
+      showToast('Copied — paste it somewhere safe (Notes, an email to yourself, etc).');
+    } catch (e) {
+      showToast('Could not auto-copy — the text is selected, so use your device’s Copy command.');
+    }
   }
 }
 
@@ -510,24 +539,33 @@ function triggerImportPicker() {
   input.click();
 }
 
+function importBackupJsonText(text) {
+  var parsed;
+  try { parsed = JSON.parse(text); } catch (e) { showToast('That doesn\'t look like a valid backup.'); return; }
+  var incoming = (parsed && parsed.state && parsed.app === 'workout-book') ? parsed.state : parsed;
+  if (!incoming || !Array.isArray(incoming.users) || !Array.isArray(incoming.workouts)) {
+    showToast('That doesn\'t look like a valid Workout Book backup.');
+    return;
+  }
+  var result = mergeStates(STATE, incoming);
+  UI.modal = null;
+  persist(result.state);
+  showToast('Backup merged — ' + result.added + ' new, ' + result.updated + ' updated.');
+}
+
 function handleImportFile(file) {
   if (!file) return;
   var reader = new FileReader();
-  reader.onload = function () {
-    var parsed;
-    try { parsed = JSON.parse(String(reader.result)); } catch (e) { showToast('That file is not a valid backup.'); return; }
-    var incoming = (parsed && parsed.state && parsed.app === 'workout-book') ? parsed.state : parsed;
-    if (!incoming || !Array.isArray(incoming.users) || !Array.isArray(incoming.workouts)) {
-      showToast('That file is not a valid Workout Book backup.');
-      return;
-    }
-    var result = mergeStates(STATE, incoming);
-    UI.modal = null;
-    persist(result.state);
-    showToast('Backup merged — ' + result.added + ' new, ' + result.updated + ' updated.');
-  };
+  reader.onload = function () { importBackupJsonText(String(reader.result)); };
   reader.onerror = function () { showToast('Could not read that file.'); };
   reader.readAsText(file);
+}
+
+function importFromPastedText() {
+  var ta = document.getElementById('bw-import-text');
+  var text = ta ? ta.value.trim() : '';
+  if (!text) { showToast('Paste your backup text first.'); return; }
+  importBackupJsonText(text);
 }
 
 function mergeBysId(existingArr, incomingArr) {
@@ -817,6 +855,7 @@ function renderModal() {
   else if (m.type === 'exerciseLibrary') inner = renderExerciseLibraryModal();
   else if (m.type === 'bodyWeightForm') inner = renderBodyWeightFormModal(m);
   else if (m.type === 'backup') inner = renderBackupModal();
+  else if (m.type === 'backupText') inner = renderBackupTextModal(m);
   else if (m.type === 'confirm') inner = renderConfirmModal(m);
   if (!inner) return '';
   return '<div class="modal-overlay" data-action="overlayClick">' + inner + '</div>';
@@ -957,12 +996,23 @@ function renderBodyWeightFormModal(m) {
 
 /* ---------------- backup / restore modal ---------------- */
 function renderBackupModal() {
-  var body = '<p class="helptext" style="margin-bottom:14px;">Workout Book saves data on this device only. Export a backup file periodically (e.g. onto your desktop) so you have a copy if this device is lost, and Import a backup on another device to bring its data in &mdash; imported entries are merged in, never overwritten.</p>' +
-    '<div class="row-actions" style="margin-bottom:10px;">' +
+  var body = '<p class="helptext" style="margin-bottom:14px;">Workout Book saves data on this device only. Export a backup periodically (e.g. onto your desktop) so you have a copy if this device is lost, and Import a backup on another device to bring its data in &mdash; imported entries are merged in, never overwritten.</p>' +
+    '<div class="row-actions" style="margin-bottom:14px;">' +
     '<button class="btn btn-accent" data-action="exportBackup">&#8595; Export Backup</button>' +
-    '<button class="btn" data-action="triggerImport">&#8593; Import Backup</button>' +
-    '</div>';
+    '<button class="btn" data-action="triggerImport">&#8593; Import from File</button>' +
+    '</div>' +
+    '<hr class="divider">' +
+    '<div class="field" style="margin-top:12px;"><label>Or paste backup text here</label>' +
+    '<textarea id="bw-import-text" placeholder="Paste the text you copied from Export here" style="width:100%; min-height:100px; font-family:var(--font-mono); font-size:12px;"></textarea>' +
+    '<button class="btn btn-sm" style="margin-top:8px;" data-action="importFromText">Import from Text</button></div>';
   return modalShell('Backup &amp; Restore', body, '<button class="btn" data-action="closeModal">Done</button>');
+}
+
+function renderBackupTextModal(m) {
+  var body = '<p class="helptext" style="margin-bottom:10px;">This app can\'t save a file directly from here &mdash; select all and copy the text below (or tap Copy), then paste it somewhere safe: a Notes app, an email to yourself, or a text file. To restore it later, paste it back in during Import.</p>' +
+    '<textarea id="bw-backup-text" readonly style="width:100%; min-height:180px; font-family:var(--font-mono); font-size:12px; border:1px solid var(--border); border-radius:var(--radius); background:var(--surface-2); padding:10px; resize:vertical;">' + escapeHtml(m.json) + '</textarea>';
+  var footer = '<button class="btn" data-action="closeModal">Done</button><button class="btn btn-accent" data-action="copyBackupText">Copy to Clipboard</button>';
+  return modalShell('Your Backup', body, footer);
 }
 
 /* ---------------- add user modal ---------------- */
@@ -1462,6 +1512,8 @@ function onGlobalClick(e) {
     case 'openBackup': actOpenBackup(); break;
     case 'exportBackup': exportBackup(); break;
     case 'triggerImport': triggerImportPicker(); break;
+    case 'copyBackupText': copyBackupText(); break;
+    case 'importFromText': importFromPastedText(); break;
   }
 }
 
