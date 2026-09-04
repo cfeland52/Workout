@@ -3,7 +3,18 @@ import { api, NetworkError } from '../api/client.js';
 import { readUiFromHash, writeUiToHash } from '../lib/hash.js';
 import { addMonths, parseYMD, todayStr } from '../lib/dateUtils.js';
 import { loadCachedState, saveCachedState, loadOutbox, saveOutbox } from '../lib/offlineCache.js';
+import { loadInProgress } from '../lib/draftCache.js';
 import { applyLocal, sendRemote } from './operations.js';
+
+// If the workout builder was left open when the tab got backgrounded/killed
+// (see components/modals/WorkoutBuilder), drop the user right back into it
+// on reload rather than the calendar, so "resume where you left off" doesn't
+// require them to notice and re-navigate there themselves.
+function resumeInProgress(ui) {
+  const saved = loadInProgress();
+  if (!saved) return ui;
+  return { ...ui, currentUserId: saved.userId || ui.currentUserId, modal: saved.modal };
+}
 
 const AppContext = createContext(null);
 
@@ -85,13 +96,13 @@ export function AppProvider({ children }) {
     // the app is usable immediately — init the UI from it before even
     // trying the network, so offline-first really means offline-first.
     if (dataRef.current) {
-      setUiState(readUiFromHash(dataRef.current));
+      setUiState(resumeInProgress(readUiFromHash(dataRef.current)));
       hashInitialized.current = true;
     }
     refresh()
       .then((next) => {
         if (hashInitialized.current) return;
-        setUiState(readUiFromHash(next));
+        setUiState(resumeInProgress(readUiFromHash(next)));
         hashInitialized.current = true;
       })
       .catch((err) => {

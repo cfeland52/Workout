@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useApp } from '../../../state/AppContext.jsx';
 import { cloneBlocksAsTemplate, draftFromWorkout, newDraft, val } from '../../../lib/draft.js';
 import { exerciseGroupOf } from '../../../lib/selectors.js';
 import { nowTimeStr } from '../../../lib/dateUtils.js';
 import { uid } from '../../../lib/id.js';
+import { clearInProgress, loadInProgress, sameModalSpec, saveInProgress } from '../../../lib/draftCache.js';
 import ModalShell from '../ModalShell.jsx';
 import { DraftProvider, useDraft } from './DraftContext.jsx';
 import StepSetup from './StepSetup.jsx';
@@ -30,10 +31,19 @@ function cleanForSave(draft, data) {
   return { cleanedBlocks, cleanedCardio };
 }
 
-function BuilderBody({ initialDate }) {
+function BuilderBody() {
   const { data, ui, submit, openModal, closeModal, showToast } = useApp();
   const { draft, update } = useDraft();
   const [saving, setSaving] = useState(false);
+
+  // A deliberate exit (the X button, or "Cancel"): the user doesn't want
+  // this draft back, so drop the safety-net copy. Getting yanked away by the
+  // OS backgrounding the tab is different — nothing runs then, so the saved
+  // copy just sits there ready to resume, which is the whole point.
+  function handleClose() {
+    clearInProgress();
+    closeModal();
+  }
 
   function continueSetup() {
     update((d) => {
@@ -86,6 +96,7 @@ function BuilderBody({ initialDate }) {
             cardio: cleanedCardio,
           };
       await submit({ entity: 'workout', action: 'upsert', id, payload });
+      clearInProgress();
       openModal({ type: 'dayDetail', date: draft.date });
     } catch (err) {
       showToast(err.message);
@@ -101,7 +112,7 @@ function BuilderBody({ initialDate }) {
     body = <StepSetup />;
     footer = (
       <>
-        <button className="btn" onClick={closeModal}>Cancel</button>
+        <button className="btn" onClick={handleClose}>Cancel</button>
         <button className="btn btn-accent" onClick={continueSetup}>Continue</button>
       </>
     );
@@ -129,7 +140,7 @@ function BuilderBody({ initialDate }) {
     body = <StepBuild />;
     footer = (
       <>
-        <button className="btn" onClick={() => (draft.editingId ? closeModal() : update((d) => { d.step = 'setup'; }))}>
+        <button className="btn" onClick={() => (draft.editingId ? handleClose() : update((d) => { d.step = 'setup'; }))}>
           {draft.editingId ? 'Cancel' : 'Back'}
         </button>
         <button className="btn btn-accent" disabled={saving} onClick={completeWorkout}>
@@ -139,13 +150,15 @@ function BuilderBody({ initialDate }) {
     );
   }
 
-  return <ModalShell title={title} footer={footer}>{body}</ModalShell>;
+  return <ModalShell title={title} footer={footer} onClose={handleClose}>{body}</ModalShell>;
 }
 
 export default function WorkoutBuilderModal() {
   const { data, ui } = useApp();
   const modal = ui.modal;
   const [draft, setDraft] = useState(() => {
+    const saved = loadInProgress();
+    if (saved && sameModalSpec(saved.modal, modal)) return saved.draft;
     if (modal.editingId) {
       const existing = data.workouts.find((w) => w.id === modal.editingId);
       return draftFromWorkout(existing);
@@ -153,9 +166,13 @@ export default function WorkoutBuilderModal() {
     return newDraft(modal.date);
   });
 
+  useEffect(() => {
+    saveInProgress(modal, ui.currentUserId, draft);
+  }, [modal, ui.currentUserId, draft]);
+
   return (
     <DraftProvider draft={draft} setDraft={setDraft}>
-      <BuilderBody initialDate={modal.date} />
+      <BuilderBody />
     </DraftProvider>
   );
 }
